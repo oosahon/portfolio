@@ -1,0 +1,34 @@
+<svg width="383" height="384" viewBox="0 0 383 384" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="383" height="384">
+<path d="M0 0H382.667V384H0V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_17_33)">
+<mask id="mask1_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-76" y="-75" width="535" height="535">
+<path d="M144.578 -74.4948L458.359 145.537L238.328 459.313L-75.4531 239.281L144.578 -74.4948Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_17_33)">
+<mask id="mask2_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-76" y="-75" width="535" height="535">
+<path d="M144.578 -74.4948L458.359 145.537L238.328 459.313L-75.4531 239.281L144.578 -74.4948Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_17_33)">
+<path d="M301.13 35.5001C233.75 -11.7499 146.302 -9.18741 82.2656 35.1043C89.9479 37.172 97.4166 40.5105 104.302 45.3334C119.375 55.9063 128.958 71.3751 132.573 88.0938C171.464 66.2761 221.042 66.9897 259.927 94.2605C313.958 132.146 327.089 206.927 289.203 260.953C251.312 314.984 176.536 328.115 122.505 290.229C83.6198 262.958 66.0573 216.594 73.3177 172.594C56.3645 174.896 38.5573 171.156 23.4843 160.583C16.5989 155.761 10.9218 149.87 6.35412 143.354C-13.4636 218.651 13.9218 301.734 81.3073 348.984C167.729 409.589 287.349 388.583 347.958 302.156C408.562 215.729 387.557 96.1095 301.13 35.5001Z" fill="#F9FAFB"/>
+</g>
+</g>
+</g>
+<mask id="mask3_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="28" y="66" width="72" height="74">
+<path d="M28 66.6666H100V140H28V66.6666Z" fill="white"/>
+</mask>
+<g mask="url(#mask3_17_33)">
+<mask id="mask4_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-76" y="-75" width="535" height="535">
+<path d="M144.578 -74.4949L458.359 145.536L238.328 459.312L-75.4531 239.281L144.578 -74.4949Z" fill="white"/>
+</mask>
+<g mask="url(#mask4_17_33)">
+<mask id="mask5_17_33" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-76" y="-75" width="535" height="535">
+<path d="M144.578 -74.4949L458.359 145.536L238.328 459.312L-75.4531 239.281L144.578 -74.4949Z" fill="white"/>
+</mask>
+<g mask="url(#mask5_17_33)">
+<path d="M43.3125 132.302C27.1406 120.958 23.2083 98.5625 34.5521 82.3854C45.8958 66.2083 68.2864 62.276 84.4635 73.6198C100.646 84.9687 104.573 107.354 93.2344 123.531C81.8854 139.708 59.4948 143.646 43.3125 132.302Z" fill="#F6AD55"/>
+</g>
+</g>
+</g>
+</svg>

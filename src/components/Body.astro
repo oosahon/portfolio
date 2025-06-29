@@ -1,0 +1,77 @@
+<body>
+  <div class="highlight-overlay"></div>
+  <div class="overlay"></div>
+  <div class="container">
+    <slot />
+  </div>
+</body>
+
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+  @use "../styles//mixins.scss";
+
+  body {
+    background-image: url("/night-sky.jpg");
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+
+    .container {
+      max-width: theme.$breakpoint-xl;
+      margin: auto;
+      padding: 0 calc(theme.$spacing * 2);
+    }
+  }
+
+  .overlay {
+    @include mixins.themeTransition;
+    background-color: rgb(map.get(theme.$theme-dark, bg), 80%);
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+  }
+
+  .highlight-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--x, 50%) var(--y, 50%),
+      rgba(map.get(theme.$theme-dark, text-primary), 0.04),
+      transparent 320px
+    );
+    transition: background 0.2s ease;
+    z-index: 0;
+  }
+
+  [data-theme="light"] {
+    .overlay {
+      background-color: rgb(map.get(theme.$theme-light, bg), 85%);
+    }
+
+    .highlight-overlay {
+      background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        rgba(map.get(theme.$theme-light, text-primary), 0.08),
+        transparent 320px
+      );
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("mousemove", (e) => {
+    const x = `${e.clientX}px`;
+    const y = `${e.clientY}px`;
+    // @ts-ignore-next-line
+    document.querySelector(".highlight-overlay").style.setProperty("--x", x);
+    // @ts-ignore-next-line
+    document.querySelector(".highlight-overlay").style.setProperty("--y", y);
+  });
+</script>

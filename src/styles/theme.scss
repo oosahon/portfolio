@@ -1,0 +1,39 @@
+$theme-light: (
+  bg: #ffffff,
+  color-primary: #b0c0d0,
+  color-secondary: #F6AD55,
+  text-primary: #171C28
+);
+
+$theme-dark: (
+  bg: #171C28,
+  color-primary: #171C28,
+  color-secondary: #F6AD55,
+  text-primary: #F9FAFB
+);
+
+
+$breakpoint-xs: 0;       // Extra small (mobile)
+$breakpoint-sm: 480px;   // Small phones
+$breakpoint-md: 768px;   // Tablets / Small desktops
+$breakpoint-lg: 1024px;  // Laptops
+$breakpoint-xl: 1280px;  // Large desktops
+$breakpoint-2xl: 1536px; // Extra large monitors
+
+
+$spacing: 8px;
+
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Italic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}

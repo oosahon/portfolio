@@ -1,0 +1,25 @@
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 600px) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (max-width: 900px) { @content; }
+  }
+}
+
+
+@mixin heading($size, $weight: 700, $lineHeight: 1.2) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+
+@mixin text($size: $font-size-body1, $weight: $font-weight-regular) {
+  font-size: size;
+}
+
+
+@mixin themeTransition() {
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+}
