@@ -1,0 +1,30 @@
+<div>
+  <h1>Osahon Oboite</h1>
+  <h6>Full Stack Engineer</h6>
+  <p class="secondary">
+    I build accessible, fast, and sometimes, AI-Powered web apps.
+  </p>
+</div>
+
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+  @use "../styles/typography.scss";
+
+  h1,
+  h6,
+  p {
+    margin-top: calc(theme.$spacing * 2);
+    margin-bottom: calc(theme.$spacing * 2);
+  }
+  h1 {
+    letter-spacing: -0.15rem;
+    word-spacing: 0.5rem;
+    color: map.get(theme.$theme-dark, color-secondary);
+    margin-bottom: calc(theme.$spacing * 2);
+  }
+
+  p {
+    max-width: 300px;
+  }
+</style>

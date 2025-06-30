@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import Header from "../components/Header.astro";
+import ProfileSummary from "../components/ProfileSummary.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -12,7 +13,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   </head>
   <Body>
     <Header />
-    <main></main>
+    <main>
+      <section>
+        <ProfileSummary />
+      </section>
+    </main>
     <!-- <Footer /> -->
   </Body>
 </html>
+
+<style lang="scss"></style>
