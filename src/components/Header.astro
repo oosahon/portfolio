@@ -1,19 +1,17 @@
 <header>
-  <nav>
-    <a href="/">
-      <img id="logo" src="logo.svg" />
-    </a>
+  <a href="/">
+    <img id="logo" src="logo.svg" />
+  </a>
 
-    <div>
-      <label id="theme-switch">
-        <input type="checkbox" class="theme-checkbox" />
-        <span class="theme-slider">
-          <span>☀️</span>
-          <span>🌙</span>
-        </span>
-      </label>
-    </div>
-  </nav>
+  <div>
+    <label id="theme-switch">
+      <input type="checkbox" class="theme-checkbox" />
+      <span class="theme-slider">
+        <span>☀️</span>
+        <span>🌙</span>
+      </span>
+    </label>
+  </div>
 </header>
 
 <style lang="scss">
@@ -21,11 +19,15 @@
   @use "../styles/theme.scss";
   @use "../styles/mixins.scss";
 
-  nav {
+  header {
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     padding-top: calc(theme.$spacing * 2);
     margin-bottom: calc(theme.$spacing * 11);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   #logo {

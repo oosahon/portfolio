@@ -1,4 +1,5 @@
 ---
+import AboutMe from "../components/AboutMe.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import Header from "../components/Header.astro";
@@ -14,12 +15,32 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <Body>
     <Header />
     <main>
-      <section>
+      <header class="profile">
         <ProfileSummary />
+      </header>
+      <section class="about-me">
+        <AboutMe />
       </section>
     </main>
     <!-- <Footer /> -->
   </Body>
 </html>
 
-<style lang="scss"></style>
+<style lang="scss">
+  @use "../styles/theme.scss";
+
+  main {
+    display: flex;
+    section.about-me {
+      width: 50%;
+    }
+
+    header.profile {
+      align-self: flex-start;
+      width: 50%;
+      display: block;
+      position: sticky;
+      top: calc(67px + calc(theme.$spacing * 11));
+    }
+  }
+</style>

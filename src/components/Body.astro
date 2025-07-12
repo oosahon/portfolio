@@ -15,8 +15,20 @@ import "../styles/typography.scss";
   @use "../styles/theme.scss";
   @use "../styles//mixins.scss";
 
+  *::selection {
+    background: rgb(
+      map.get(theme.$theme-dark, color-secondary),
+      50%
+    ); /* Highlight background */
+    color: map.get(
+      theme.$theme-light,
+      text-primary
+    ); /* Highlighted text color */
+  }
+
   body {
     background-image: url("/night-sky.jpg");
+    background-attachment: fixed;
     font-family: "Inter", sans-serif;
     min-height: 100vh;
     background-size: cover;
@@ -33,10 +45,11 @@ import "../styles/typography.scss";
 
   .overlay {
     @include mixins.themeTransition;
-    background-color: rgb(map.get(theme.$theme-dark, bg), 80%);
+    background: rgb(map.get(theme.$theme-dark, bg), 80%);
+    background-attachment: fixed;
     position: absolute;
     top: 0;
-    height: 100vh;
+    min-height: 100%;
     width: 100vw;
     z-index: -1;
   }

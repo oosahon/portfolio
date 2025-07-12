@@ -64,10 +64,16 @@ h6 {
   line-height: $line-height-h6;
 }
 
-p.body1 {
+li, a, p.body1 {
   font-size: $font-size-body1;
   font-weight: $font-weight-regular;
   line-height: $line-height-body1;
+}
+
+p {
+  font-size: $font-size-body1;
+  font-weight: $font-weight-regular;
+    line-height: $line-height-body1;
 }
 
 p.body2 {
@@ -82,7 +88,13 @@ p.caption {
   line-height: $line-height-caption;
 }
 
+
+
 [data-theme="dark"] {
+  * {
+    color: map.get(theme.$theme-dark, text-primary);
+  }
+
   h1.secondary,
   h2.secondary,
   h3.secondary,
@@ -100,6 +112,10 @@ p.caption {
 
 
 [data-theme="light"] {
+    * {
+    color: map.get(theme.$theme-light, text-secondary);
+  }
+
   h1.secondary,
   h2.secondary,
   h3.secondary,
