@@ -3,11 +3,7 @@ import "../styles/typography.scss";
 ---
 
 <body>
-  <div class="highlight-overlay"></div>
-  <div class="overlay"></div>
-  <div class="container">
-    <slot />
-  </div>
+  <slot />
 </body>
 
 <style lang="scss">
@@ -16,18 +12,17 @@ import "../styles/typography.scss";
   @use "../styles//mixins.scss";
 
   *::selection {
-    background: rgb(
-      map.get(theme.$theme-dark, color-secondary),
-      50%
-    ); /* Highlight background */
-    color: map.get(
-      theme.$theme-light,
-      text-primary
-    ); /* Highlighted text color */
+    background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
+    color: map.get(theme.$theme-light, text-primary);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
   }
 
   body {
-    background-image: url("/night-sky.jpg");
+    background-color: map.get(theme.$theme-dark, bg);
     background-attachment: fixed;
     font-family: "Inter", sans-serif;
     min-height: 100vh;
@@ -35,65 +30,11 @@ import "../styles/typography.scss";
     padding: 0;
     margin: 0;
     color: map.get(theme.$theme-dark, text-primary);
-
-    .container {
-      max-width: theme.$breakpoint-xl;
-      margin: auto;
-      padding: 0 calc(theme.$spacing * 2);
-    }
   }
 
-  .overlay {
-    @include mixins.themeTransition;
-    background: rgb(map.get(theme.$theme-dark, bg), 80%);
-    background-attachment: fixed;
-    position: absolute;
-    top: 0;
-    min-height: 100%;
-    width: 100vw;
-    z-index: -1;
-  }
-
-  .highlight-overlay {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    background: radial-gradient(
-      circle at var(--x, 50%) var(--y, 50%),
-      rgba(map.get(theme.$theme-dark, text-primary), 0.04),
-      transparent 320px
-    );
-    transition: background 0.2s ease;
-    z-index: 0;
-  }
-
-  h1 {
-  }
-
-  [data-theme="light"] {
+  body[data-theme="light"] {
+    background-color: map.get(theme.$theme-light, bg);
+    background-image: none;
     color: map.get(theme.$theme-light, text-primary);
-    .overlay {
-      background-color: rgb(map.get(theme.$theme-light, bg), 95%);
-    }
-
-    .highlight-overlay {
-      background: radial-gradient(
-        circle at var(--x, 50%) var(--y, 50%),
-        rgba(map.get(theme.$theme-light, text-primary), 0.08),
-        transparent 320px
-      );
-    }
   }
 </style>
-
-<script>
-  document.addEventListener("mousemove", (e) => {
-    const x = `${e.clientX}px`;
-    const y = `${e.clientY}px`;
-    // @ts-ignore-next-line
-    document.querySelector(".highlight-overlay").style.setProperty("--x", x);
-    // @ts-ignore-next-line
-    document.querySelector(".highlight-overlay").style.setProperty("--y", y);
-  });
-</script>

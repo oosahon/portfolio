@@ -1,17 +1,19 @@
 $theme-light: (
   bg: #ffffff,
+  bg-light: #FDFEFE,
   color-primary: #b0c0d0,
   color-secondary: #F6AD55,
-  text-primary: #171C28,
-  text-secondary: #666666
+  text-primary: #18181B,
+  text-secondary:#3F3F46
 );
 
 $theme-dark: (
-  bg: #171C28,
+  bg: #09090B,
+  bg-light: #202123,
   color-primary: #171C28,
   color-secondary: #F6AD55,
-  text-primary: #F9FAFB,
-  text-secondary: #A0AEC0
+  text-primary: #FFFFFF,
+  text-secondary: #A1A1AA
 );
 
 

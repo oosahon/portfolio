@@ -1,149 +1,55 @@
-<div>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
-  <p>
-    I am a full stack developer with extensive experience in building
-    accessible, highly-performant and visually appealing web applications. I
-    enjoy working on task automation and practical features.
-  </p>
+<header>
+  <div>
+    <img src="/profile-picture-rounded.png" alt="Profile Picture" />
+    <h1>Osahon Oboite</h1>
+    <p>
+      Full-stack engineer building accessible, fast, and sometimes AI-powered
+      web apps.
+    </p>
+  </div>
+</header>
 
-  <p>
-    I'm currently working as a Full Stack developer at <a
-      href="https://streaem.com"
-      target="_blank">Streaem</a
-    >
-  </p>
-</div>
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+  @use "../styles/mixins.scss";
+  @use "../styles/typography.scss";
+
+  header {
+    background-color: map.get(theme.$theme-dark, bg-light);
+    padding: theme.$spacing * 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    > div {
+      @include mixins.container;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: theme.$spacing * 2;
+    }
+
+    h1 {
+      font-size: typography.$font-size-h5;
+      font-weight: typography.$font-weight-bold;
+      line-height: 1rem;
+      margin: 0;
+    }
+
+    p {
+      color: map.get(theme.$theme-dark, text-secondary);
+      margin-bottom: 0;
+    }
+  }
+
+  body[data-theme="light"] {
+    header {
+      background-color: map.get(theme.$theme-light, bg-light);
+      border: 1px solid rgb(229, 231, 235);
+    }
+  }
+</style>

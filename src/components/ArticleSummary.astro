@@ -1,0 +1,28 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+}
+
+const { title, date, description } = Astro.props;
+---
+
+<div>
+  <h2>{title}</h2>
+  <FormattedDate date={date} />
+  <p class="secondary">{description}</p>
+</div>
+
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+  @use "../styles/typography.scss";
+
+  h2 {
+    font-size: typography.$font-size-h3;
+    font-weight: typography.$font-weight-bold;
+  }
+</style>

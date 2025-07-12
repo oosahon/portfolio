@@ -1,26 +1,34 @@
 ---
-import AboutMe from "../components/AboutMe.astro";
+import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import Header from "../components/Header.astro";
-import ProfileSummary from "../components/ProfileSummary.astro";
+import AboutMe from "../components/AboutMe.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import ArticleSummary from "../components/ArticleSummary.astro";
+
+const articles = (await getCollection("article")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <Body>
     <Header />
+    <AboutMe />
     <main>
-      <header class="profile">
-        <ProfileSummary />
-      </header>
-      <section class="about-me">
-        <AboutMe />
-      </section>
+      {
+        articles.map((article) => (
+          <ArticleSummary
+            title={article.data.title}
+            date={article.data.pubDate}
+            description={article.data.description}
+          />
+        ))
+      }
     </main>
     <!-- <Footer /> -->
   </Body>
@@ -28,8 +36,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 <style lang="scss">
   @use "../styles/theme.scss";
+  @use "../styles/mixins.scss";
 
   main {
+    @include mixins.contentArea;
     display: flex;
     section.about-me {
       width: 50%;

@@ -1,3 +1,5 @@
+@use "./theme.scss";
+
 @mixin responsive($breakpoint) {
   @if $breakpoint == mobile {
     @media (max-width: 600px) { @content; }
@@ -22,4 +24,16 @@
     transition:
       background-color 0.4s ease,
       color 0.4s ease;
+}
+
+@mixin contentArea() {
+  width: 600px;
+  max-width: 95vw;
+  margin: auto;
+}
+
+@mixin container() {
+    max-width: theme.$breakpoint-xl;
+    margin: auto;
+    padding: 0 calc(theme.$spacing * 2);
 }

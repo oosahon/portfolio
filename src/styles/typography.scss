@@ -27,6 +27,7 @@ $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
+$font-weight-bolder: 900;
 
 h1 {
   font-size: $font-size-h1;
@@ -76,7 +77,7 @@ p {
     line-height: $line-height-body1;
 }
 
-p.body2 {
+time,p.body2 {
   font-size: $font-size-body2;
   font-weight: $font-weight-regular;
   line-height: $line-height-body2;
@@ -104,7 +105,8 @@ p.caption {
   p.secondary,
   span.secondary,
   li.secondary,
-  a.secondary {
+  a.secondary, 
+  time {
     color: map.get(theme.$theme-dark, text-secondary);
   }
 }
@@ -113,7 +115,7 @@ p.caption {
 
 [data-theme="light"] {
     * {
-    color: map.get(theme.$theme-light, text-secondary);
+    color: map.get(theme.$theme-light, text-primary);
   }
 
   h1.secondary,
@@ -125,7 +127,8 @@ p.caption {
   p.secondary,
   span.secondary,
   li.secondary,
-  a.secondary {
+  a.secondary,
+  time {
     color: map.get(theme.$theme-light, text-secondary);
   }
 }
