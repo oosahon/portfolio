@@ -1,16 +1,18 @@
 <header>
-  <a href="/">
-    <img id="logo" src="/logo.svg" alt="osahon.dev" />
-  </a>
-
   <div>
-    <label id="theme-switch">
-      <input type="checkbox" class="theme-checkbox" />
-      <span class="theme-slider">
-        <span>☀️</span>
-        <span>🌙</span>
-      </span>
-    </label>
+    <a href="/">
+      <img id="logo" src="/logo.svg" alt="osahon.dev" />
+    </a>
+
+    <div>
+      <label id="theme-switch">
+        <input type="checkbox" class="theme-checkbox" />
+        <span class="theme-slider">
+          <span>☀️</span>
+          <span>🌙</span>
+        </span>
+      </label>
+    </div>
   </div>
 </header>
 
@@ -20,14 +22,16 @@
   @use "../styles/mixins.scss";
 
   header {
-    @include mixins.container;
-    display: flex;
     position: sticky;
     top: 0;
-    justify-content: space-between;
-    padding: calc(theme.$spacing * 2) 0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+
+    > div {
+      @include mixins.container;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   #logo {

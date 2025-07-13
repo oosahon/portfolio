@@ -27,13 +27,14 @@
 }
 
 @mixin contentArea() {
-  width: 700px;
-  max-width: 97vw;
+  width: 100%;
+  max-width: 800px;
   margin: auto;
+  padding: theme.$spacing * 3;
 }
 
 @mixin container() {
     max-width: theme.$breakpoint-xl;
     margin: auto;
-    padding: 0 calc(theme.$spacing * 2);
+    padding: theme.$spacing * 3;
 }

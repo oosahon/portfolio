@@ -24,12 +24,22 @@ const { title, date, description, id } = Astro.props;
   @use "../styles/theme.scss";
   @use "../styles/typography.scss";
 
+  a {
+    text-decoration: none;
+  }
+
   h2 {
     font-size: typography.$font-size-h3;
     font-weight: typography.$font-weight-bold;
   }
 
-  a {
-    text-decoration: none;
+  p {
+    margin-top: theme.$spacing;
+  }
+
+  @media (max-width: theme.$breakpoint-md) {
+    h2 {
+      font-size: typography.$font-size-h4;
+    }
   }
 </style>

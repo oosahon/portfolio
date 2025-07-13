@@ -21,6 +21,7 @@ const articles = (await getCollection("article")).sort(
       {
         articles.map((article) => (
           <ArticleSummary
+            id={article.id}
             title={article.data.title}
             date={article.data.pubDate}
             description={article.data.description}
@@ -39,6 +40,9 @@ const articles = (await getCollection("article")).sort(
   main {
     @include mixins.contentArea;
     display: flex;
+    flex-direction: column;
+    gap: theme.$spacing * 8;
+    margin-top: theme.$spacing * 11;
     section.about-me {
       width: 50%;
     }
