@@ -8,6 +8,8 @@ const article = defineCollection({
       title: z.string(),
       description: z.string(),
       pubDate: z.coerce.date(),
+      slug: z.string(),
+      readTime: z.number().optional(),
       updatedDate: z.coerce.date().optional(),
       external: z.boolean().optional(),
     }),

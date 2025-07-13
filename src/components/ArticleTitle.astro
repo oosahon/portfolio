@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+import Divider from "./Divider.astro";
+
+type Props = CollectionEntry<"article">["data"];
+
+const { title, pubDate, updatedDate, readTime } = Astro.props;
+---
+
+<h1>{title}</h1>
+
+<div class="title">
+  <div class="data">
+    <div>
+      <FormattedDate date={pubDate} />
+    </div>
+
+    {
+      updatedDate && (
+        <div>
+          <span class="period">·</span>Last updated on{" "}
+          <FormattedDate date={updatedDate} />
+        </div>
+      )
+    }
+
+    {
+      readTime && (
+        <div>
+          <span class="period">·</span>
+          <img src="/auto-stories.svg" alt="read time" />{" "}
+          <p class="secondary">{readTime} min read</p>
+        </div>
+      )
+    }
+  </div>
+  <Divider />
+</div>
+
+<style lang="scss">
+  @use "../styles/theme.scss";
+
+  h1 {
+    text-align: center;
+  }
+
+  .title {
+    margin-bottom: theme.$spacing * 8;
+  }
+
+  .data {
+    display: flex;
+    gap: theme.$spacing * 3;
+    align-items: center;
+    margin-bottom: theme.$spacing * 2;
+
+    > div {
+      display: flex;
+      gap: theme.$spacing;
+      align-items: center;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .period {
+      margin-right: theme.$spacing;
+    }
+  }
+</style>

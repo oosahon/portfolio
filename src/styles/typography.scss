@@ -1,26 +1,25 @@
 @use "sass:map";
 @use "./theme.scss";
 
+$font-size-h1: 3rem;
+$font-size-h2: 2.5rem;
+$font-size-h3: 2rem;
+$font-size-h4: 1.75rem;
+$font-size-h5: 1.5rem;
+$font-size-h6: 1.25rem;
+$font-size-body1: 1.125rem;
+$font-size-body2: 1rem;
+$font-size-caption: 0.875rem;
 
-$font-size-h1: 3.0rem;        // 40px
-$font-size-h2: 2.5rem;        // 32px
-$font-size-h3: 2.0rem;        // 28px
-$font-size-h4: 1.75rem;       // 24px
-$font-size-h5: 1.5rem;        // 20px
-$font-size-h6: 1.125rem;      // 18px
-$font-size-body1: 1rem;       // 16px
-$font-size-body2: 0.875rem;   // 14px
-$font-size-caption: 0.75rem;  // 12px
-
-$line-height-h1: 2.75rem;        // ~44px
-$line-height-h2: 2.375rem;       // ~38px
-$line-height-h3: 2rem;           // ~32px
-$line-height-h4: 1.75rem;        // ~28px
-$line-height-h5: 1.5rem;         // ~24px
-$line-height-h6: 1.375rem;       // ~22px
-$line-height-body1: 1.5rem;      // ~24px
-$line-height-body2: 1.375rem;    // ~22px
-$line-height-caption: 1.25rem;   // ~20px
+$line-height-h1: 3.5rem;
+$line-height-h2: 3rem;
+$line-height-h3: 2.5rem;
+$line-height-h4: 2.25rem;
+$line-height-h5: 2rem;
+$line-height-h6: 1.75rem;
+$line-height-body1: 1.75rem;
+$line-height-body2: 1.5rem;
+$line-height-caption: 1.25rem;
 
 $font-weight-light: 300;
 $font-weight-regular: 400;
@@ -31,7 +30,7 @@ $font-weight-bolder: 900;
 
 h1 {
   font-size: $font-size-h1;
-  font-weight: $font-weight-bold; // corrected from $font-size-h1
+  font-weight: $font-weight-bold;
   line-height: $line-height-h1;
 }
 
@@ -65,19 +64,17 @@ h6 {
   line-height: $line-height-h6;
 }
 
-li, a, p.body1 {
+p,
+li,
+a,
+p.body1 {
   font-size: $font-size-body1;
   font-weight: $font-weight-regular;
   line-height: $line-height-body1;
 }
 
-p {
-  font-size: $font-size-body1;
-  font-weight: $font-weight-regular;
-    line-height: $line-height-body1;
-}
-
-time,p.body2 {
+p.body2,
+time {
   font-size: $font-size-body2;
   font-weight: $font-weight-regular;
   line-height: $line-height-body2;
@@ -89,9 +86,7 @@ p.caption {
   line-height: $line-height-caption;
 }
 
-
-
-[data-theme="dark"] {
+body[data-theme="dark"] {
   * {
     color: map.get(theme.$theme-dark, text-primary);
   }
@@ -105,16 +100,14 @@ p.caption {
   p.secondary,
   span.secondary,
   li.secondary,
-  a.secondary, 
+  a.secondary,
   time {
     color: map.get(theme.$theme-dark, text-secondary);
   }
 }
 
-
-
-[data-theme="light"] {
-    * {
+body[data-theme="light"] {
+  * {
     color: map.get(theme.$theme-light, text-primary);
   }
 

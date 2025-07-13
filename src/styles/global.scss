@@ -1,0 +1,53 @@
+  @use "sass:map";
+  @use "./theme.scss";
+  @use "./mixins.scss";
+
+  *::selection {
+    background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
+    color: map.get(theme.$theme-light, text-primary);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: map.get(theme.$theme-dark, bg);
+    background-attachment: fixed;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    color: map.get(theme.$theme-dark, text-primary);
+
+    blockquote {
+    padding-left: theme.$spacing * 0.5;
+    margin: 1rem 0;
+    font-style: italic;
+     border-left: 4px solid map.get(theme.$theme-dark, bg-light);
+
+     p {
+         padding-left: theme.$spacing * 2;
+     }
+    }
+  }
+
+  article p {
+    line-height: 2rem;
+    margin-bottom: theme.$spacing * 3;
+  }
+
+  body[data-theme="dark"] {
+    background-color: map.get(theme.$theme-dark, bg);
+    background-image: url("/images/bg-dark.png");
+    color: map.get(theme.$theme-dark, text-primary);
+
+  }
+
+  body[data-theme="light"] {
+    background-color: map.get(theme.$theme-light, bg);
+    background-image: none;
+    color: map.get(theme.$theme-light, text-primary);
+  }

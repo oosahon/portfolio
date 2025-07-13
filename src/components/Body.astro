@@ -1,40 +1,8 @@
 ---
 import "../styles/typography.scss";
+import "../styles/global.scss";
 ---
 
 <body>
   <slot />
 </body>
-
-<style lang="scss">
-  @use "sass:map";
-  @use "../styles/theme.scss";
-  @use "../styles//mixins.scss";
-
-  *::selection {
-    background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
-    color: map.get(theme.$theme-light, text-primary);
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    background-color: map.get(theme.$theme-dark, bg);
-    background-attachment: fixed;
-    font-family: "Inter", sans-serif;
-    min-height: 100vh;
-    background-size: cover;
-    padding: 0;
-    margin: 0;
-    color: map.get(theme.$theme-dark, text-primary);
-  }
-
-  body[data-theme="light"] {
-    background-color: map.get(theme.$theme-light, bg);
-    background-image: none;
-    color: map.get(theme.$theme-light, text-primary);
-  }
-</style>

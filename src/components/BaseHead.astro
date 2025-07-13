@@ -90,9 +90,9 @@ const { title, description, image = FallbackImage } = Astro.props;
     const logo = document.querySelector("#logo");
 
     if (theme === "dark") {
-      logo?.setAttribute("src", "logo-light.svg");
+      logo?.setAttribute("src", "/logo-light.svg");
     } else {
-      logo?.setAttribute("src", "logo.svg");
+      logo?.setAttribute("src", "/logo.svg");
     }
   }
 
