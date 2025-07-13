@@ -2,7 +2,7 @@
   <div>
     <img src="/profile-picture-rounded.png" alt="Profile Picture" />
     <h1>Osahon Oboite</h1>
-    <p>
+    <p class="body2">
       Full-stack engineer building accessible, fast, and sometimes AI-powered
       web apps.
     </p>
@@ -36,13 +36,12 @@
     h1 {
       font-size: typography.$font-size-h5;
       font-weight: typography.$font-weight-bold;
-      line-height: 1rem;
+      line-height: typography.$line-height-h5;
       margin: 0;
     }
 
     p {
       color: map.get(theme.$theme-dark, text-secondary);
-      margin-bottom: 0;
     }
   }
 
