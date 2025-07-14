@@ -9,6 +9,7 @@ import {
 } from '@shikijs/transformers';
 // @ts-ignore
 import remarkCodeTitles from "remark-code-titles";
+import remarkMath from 'remark-math';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +22,8 @@ export default defineConfig({
 
   markdown: {
     syntaxHighlight: 'shiki',
-	remarkPlugins: [remarkCodeTitles],
+	  remarkPlugins: [remarkCodeTitles, remarkMath],
+    // rehypePlugins: [rehypeKatex],
     shikiConfig: {
       themes: {
         light: 'github-light',
