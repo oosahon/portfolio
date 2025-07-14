@@ -75,7 +75,7 @@ p.body1 {
 }
 
 p.body2,
-time {
+time, p > code {
   font-size: $font-size-body2;
   font-weight: $font-weight-regular;
   line-height: $line-height-body2;

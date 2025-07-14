@@ -99,6 +99,8 @@
     const body = document.querySelector("body");
     const logo = document.querySelector("#logo");
 
+    const codeBlocks = document.querySelectorAll("pre");
+
     if (!body) return;
 
     const theme = body?.getAttribute("data-theme");
@@ -106,9 +108,19 @@
     if (theme === "dark") {
       body.setAttribute("data-theme", "light");
       logo?.setAttribute("src", "/logo.svg");
+
+      codeBlocks.forEach((block) => {
+        block.classList.remove("github-light");
+        block.classList.add("github-dark");
+      });
     } else {
       body.setAttribute("data-theme", "dark");
       logo?.setAttribute("src", "/logo-light.svg");
+
+      codeBlocks.forEach((block) => {
+        block.classList.remove("github-dark");
+        block.classList.add("github-light");
+      });
     }
   });
 </script>

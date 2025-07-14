@@ -1,0 +1,17 @@
+<aside>
+  <h2>TL;DR</h2>
+  <slot />
+</aside>
+
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+
+  aside {
+    background-color: rgb(map.get(theme.$theme-dark, color-secondary), 0.1);
+    border: 2px solid map.get(theme.$theme-dark, color-secondary);
+    border-radius: theme.$border-radius;
+    padding: theme.$spacing * 3;
+    margin: theme.$spacing * 5 0;
+  }
+</style>

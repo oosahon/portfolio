@@ -1,0 +1,501 @@
+---
+title: "UI Documentation with Storybook: Documenting Stateful and Presentational Components in React"
+pubDate: "Jul 15 2024"
+description: "Learn how to write stories for both presentational and stateful components in Storybook. This guide covers decorators, mocking API calls, and best practices for documenting complex UIs with real-world examples."
+slug: "ui-documentation-with-storybook-documenting-stateful-and-presentational-components-in-react"
+readTime: 8
+---
+
+import Tldr from '../../components/Tldr.astro'
+import Callout from '../../components/Callout.astro'
+
+Welcome to the second part of this Storybook tutorial. In the [first article](/articles/ui-documentation-with-storybook-a-beginners-guide-to-getting-started), we looked at how to set up Storybook in your React application and the various parts that make up a “Story”.  
+
+By the end of this article, you will learn how to:
+
+- Write your own stories for presentational and stateful components.
+- Use Storybook decorators to inject data.
+- Mock API calls and module imports in Storybook.
+
+<Tldr>
+To document stateful components using Storybook, you could:
+
+1. Refactor the stateful component to a presentational component
+2. Use Storybook decorators to provide additional markup or global, component or story-level contexts
+3. Use [msw-storybook-addon](https://storybook.js.org/addons/msw-storybook-addon) to mock API calls
+</Tldr>
+
+### Writing Stories for Presentational Components
+
+In React, presentational (dumb) components are stateless, purely functional components that display data on the UI. All the data they require are passed down from a parent component.  
+
+Writing stories for presentational components is straightforward — pass the props as `args`.
+
+Let’s say we have a simple profile component:  
+
+```jsx:Profile.js
+export const Profile = ({ fullName, email, isVerified, profilePicture }) => {
+  return (
+    <div className="profile">
+      <div className="profile-picture">
+        <img src={profilePicture} alt="Profile Picture" />
+      </div>
+      <div className="profile-details">
+        <h2>{fullName}</h2>
+        <p>{email}</p>
+        {isVerified ? (
+          <p className="verified">Verified</p>
+        ) : (
+          <p className="not-verified">Not Verified</p>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+The Story for this component will look like so:  
+
+```jsx:Profile.stories.js
+import { Profile } from "./Profile";
+
+export default {
+  title: "Profile",
+  component: Profile,
+  argTypes: {
+    fullName: { control: "text" },
+    email: { control: "text" },
+    isVerified: { control: "boolean" },
+    profilePicture: { control: "text" },
+  },
+};
+
+export const Verified = {
+  args: {
+    fullName: "John Doe",
+    email: "johndoe@example.com",
+    isVerified: true,
+    profilePicture: "https://example.com/profile.jpg",
+  },
+};
+
+export const Unverified = {
+  args: {
+    fullName: "Jane Smith",
+    email: "janesmith@example.com",
+    isVerified: false,
+    profilePicture: "https://example.com/profile.jpg",
+  },
+};
+```
+
+If you do not understand concepts like argTypes and similar ones, you should refer to the [previous article](/articles/ui-documentation-with-storybook-a-beginners-guide-to-getting-started).
+
+
+### Writing Stories for Stateful Components
+
+What if our `<Profile />` component does not receive its data from its parent as props? What if it makes its own API calls or receives them from a context provider?  
+
+In this case, we could go one of four routes:  
+
+- Refactor the stateful component to be a presentational component
+- Use storybook decorators to mock the context provider if the data is being received from a context provider.
+- Mock the API call in `useProfileInfo()` if it makes an API call.
+- Mock the `useProfileInfo()` import altogether.  
+
+Let’s examine each of these solutions individually.
+
+#### Refactoring a stateful component to presentational components
+
+For some components, refactoring them into presentational components could be relatively easy.  
+
+If we take our previous `<Profile />` component and make it into a stateful component, it could look like this:
+
+```js:Profile.js
+import { useProfileData } from 'hooks/useProfileData'
+
+export const Profile = () => {
+const { fullName, email, isVerified, profilePicture } = useProfileData();
+
+  return (
+    <div className="profile">
+      <div className="profile-picture">
+        <img src={profilePicture} alt="Profile Picture" />
+      </div>
+      <div className="profile-details">
+        <h2>{fullName}</h2>
+        <p>{email}</p>
+        {isVerified ? (
+          <p className="verified">Verified</p>
+        ) : (
+          <p className="not-verified">Not Verified</p>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+Refactoring this to look like the original `<Profile />` component could look like so:
+
+```js:ProfilePage.js
+import { Profile } from '../components/profile/Profile.js';
+
+const ProfilePage = () => {
+    const { fullName, email, isVerified, profilePicture } = useProfileData();
+
+    return (
+        <div>
+            <h1> User Profile </h1>
+            <Profile
+                fullName={fullName}
+                email={email}
+                isVerified={isVerified}
+                profilePicture={profilePicture}
+            />
+        </div>
+    )
+};
+```
+
+…and just like that, we have a simple presentational component, whose story we can pass props to using the args property.  
+
+However, things are not always this easy. The component may hold a significant amount of state, making it difficult to move that state data to the parent component without excessive prop drilling.  
+
+We would have to employ a different approach to solve this problem — decorators.  
+
+#### What are storybook decorators?
+
+Decorators in Storybook are a way to provide extra rendering functionality to Stories. You can use them to provide extra markup or an environment for mocking, as we will see shortly.  
+
+They can be defined at three levels — global, component and story.  
+
+```js:.storybook/preview.js
+// ======== Global level ===========
+
+import { Preview } from '@storybook/react';
+
+const preview = {
+  decorators: [
+    (Story) => (
+      <div style={{ background: 'red' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export default preview;
+```
+
+
+```js:Profile.stories.js
+// ============= Component level ============
+
+import { Profile } from './Profile';
+
+export default {
+  title: 'Profile',
+  component: Profile,
+    decorators: [
+        (Story) => (
+             <div style={{ background: 'red' }}>
+        <Story />
+      </div>
+        )
+    ],
+    //...
+};
+
+```
+
+```js:Profile.stories.js
+// ============= Story level ============
+
+export const Verified = {
+    decorators: [
+        (Story) => (
+             <div style={{ background: 'red' }}>
+        <Story />
+      </div>
+        )
+    ],
+    args: {
+        fullName: 'John Doe',
+      email: 'johndoe@example.com',
+      isVerified: true,
+      profilePicture: 'https://example.com/profile.jpg'
+    }
+};
+
+```
+
+<Callout variant='info' showIcon>
+Decorators are applied to a story in this order of precedence: story level, component level, and global. That is, when decorators are defined both story and component levels, the Story level would be applied.
+</Callout>
+
+
+
+##### Providing data with decorators
+
+Let’s assume that the `useProfileData()` hook from the previous example received it’s data from a context provider like so.
+
+```jsx
+/**
+    Disclaimer: The following code is contrived for demonstration purposes.
+    Please focus on the underlying concept rather than nitpicking the code 
+    for real-world use. The intention is to illustrate an idea or approach
+    rather than providing production-ready code.
+**/
+
+import { createContext, useState, useContext } from "react";
+
+const authContext = createContext();
+
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => {
+    setUser(userData);
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
+
+  const contextValue = { user, login, logout };
+
+  return (
+    <authContext.Provider value={contextValue}>{children}</authContext.Provider>
+  );
+};
+
+const useProfileData = () => {
+  const context = useContext(authContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context.user;
+};
+
+export { AuthProvider, useProfileData };
+
+```
+
+If we have a `<ProfilePage />` component uses the useProfileData like so:  
+
+```jsx:ProfilePage.js
+import { useProfileData } from "../authContext";
+
+export const ProfilePage = () => {
+  const { fullName, email, isVerified, profilePicture } = useProfileData();
+
+  return (
+    <div>
+      <h1> User Profile </h1>
+      <Profile
+        fullName={fullName}
+        email={email}
+        isVerified={isVerified}
+        profilePicture={profilePicture}
+      />
+    </div>
+  );
+};
+
+```
+
+The story for `<ProfilePage />` would look like this:
+
+```js:ProfilePage.stories.js
+import { ProfilePage } from "./ProfilePage";
+
+export default {
+  title: "Profile page",
+  component: ProfilePage,
+  argTypes: {
+    fullName: { control: "text" },
+    email: { control: "text" },
+    isVerified: { control: "boolean" },
+    profilePicture: { control: "text" },
+  },
+};
+
+export const Default = {};
+
+```
+
+The stories of this component will fail because there’s no authentication context.  
+
+As stated earlier, decorators can be used in one of three levels — global, component or story.  
+
+In our case, let’s put it in the global level like so:  
+
+```js:.storybook.preview.js
+import { AuthProvider } from "../src/useAuth";
+
+/** @type { import('@storybook/react').Preview } */
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <AuthProvider>
+        <Story />
+      </AuthProvider>
+    ),
+  ],
+};
+
+export default preview;
+```
+
+Now, every story would have access to this context.  
+
+We could have also wrapped the `<AuthProvider />` around the `<ProfilePage />` component using the render method of stories like so:  
+
+```js:ProfilePage.stories.js
+export const Default = {
+  args: {},
+  render: () => (
+    <AuthProvider>
+      <ProfilePage />
+    </AuthProvider>
+  ),
+};
+```
+
+The issue here is that we would also have to do this for every component that uses the `<AuthProvider />` context, which is an anti-pattern.  
+
+
+##### Mocking API Calls
+
+Another common action performed by components is making API calls. However, it is important to remember that Storybook's main purpose is to help us build components in isolation. When components make API calls internally, we need to find a way to mock those calls to avoid external dependencies in our stories. Storybook decorators can also be used to create an environment for mocking these calls.  
+
+Let’s assume that our `useProfileData()` hook made its own API call like so:  
+
+```js
+import { useQuery } from "react-query";
+
+const fetchProfileData = async (userId) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${userId}`,
+  );
+  return response.json();
+};
+
+export const useProfileData = (userId) => {
+  return useQuery(["profile", userId], () => fetchProfileData(userId));
+};
+```
+
+To mock this call, we are going to use the [`msw-storybook-addon`](https://www.npmjs.com/package/msw-storybook-addon)
+
+```text
+yarn add -D msw msw-storybook-addon
+```
+
+Let’s make this globally available with decorators:  
+
+```js:.storybook/preview.ts
+import { initialize, mswDecorator } from "msw-storybook-addon";
+import { AuthProvider } from "../src/useAuth";
+
+/*
+ * Learn how to customize the initialization here:
+ * https://github.com/mswjs/msw-storybook-addon#configuring-msw
+ */
+initialize();
+
+/** @type { import('@storybook/react').Preview } */
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <AuthProvider>
+        <Story />
+      </AuthProvider>
+    ),
+  + mswDecorator, // [!code ++]
+  ],
+};
+
+export default preview;
+```
+
+If you’re not already using MSW in your project, run: 
+
+```text
+npx msw init public/
+```
+
+
+This command will generate a service worker for msw in your project. (For further reading, see the [MSW official guide](https://mswjs.io/docs/getting-started/integrate/browser).)  
+
+With that, we are ready to provide mock data for our component:  
+
+```js
+import { rest } from "msw";
+import { ProfilePage } from "./ProfilePage";
+
+export default {
+  title: "Profile page",
+  component: ProfilePage,
+  argTypes: {
+    fullName: { control: "text" },
+    email: { control: "text" },
+    isVerified: { control: "boolean" },
+    profilePicture: { control: "text" },
+  },
+};
+
+const mockData = {
+  id: "1",
+  name: "Jason Bourne",
+  username: "bourne",
+  email: "bourne@acia.com",
+  address: "Everywhere",
+};
+
+export const Default = {
+  parameters: {
+    msw: [
+      // we are using the wildcard (*) to match every id
+      rest.get(
+        "https://jsonplaceholder.typicode.com/users/*",
+        (req, res, ctx) => {
+          return res(ctx.json(mockData));
+        },
+      ),
+    ],
+  },
+};
+```
+
+Voila! We have a fully functional story for our page component. 🎉  
+
+### Conclusion
+
+In conclusion, documenting stateful user interfaces is crucial for maintaining and scaling complex applications. Storybook provides a powerful toolset for documenting and testing components in isolation. Always remember to consider the specific needs and requirements of your project when documenting stateful UIs. Experiment with different approaches, refactor components as needed, and make use of Storybook's extensive ecosystem of addons and tools to enhance your documentation workflow.  
+
+Happy documenting!  
+
+#### Further reading
+
+- Decorators: https://storybook.js.org/docs/react/writing-stories/decorators
+- Intercepting requests with msw: https://mswjs.io/docs/basics/intercepting-requests

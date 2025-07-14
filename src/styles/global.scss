@@ -1,53 +1,112 @@
-  @use "sass:map";
-  @use "./theme.scss";
-  @use "./mixins.scss";
+@use "sass:map";
+@use "./theme.scss";
+@use "./mixins.scss";
+@use "./typography.scss";
 
-  *::selection {
-    background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
-    color: map.get(theme.$theme-light, text-primary);
-  }
+*::selection {
+  background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
+  color: map.get(theme.$theme-light, text-primary);
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  body {
-    background-color: map.get(theme.$theme-dark, bg);
-    background-attachment: fixed;
-    font-family: "Inter", sans-serif;
-    min-height: 100vh;
-    background-size: cover;
-    margin: 0;
-    color: map.get(theme.$theme-dark, text-primary);
+body {
+  background-color: map.get(theme.$theme-dark, bg);
+  background-attachment: fixed;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  background-size: cover;
+  margin: 0;
+  color: map.get(theme.$theme-dark, text-primary);
 
-    blockquote {
+  blockquote {
     padding-left: theme.$spacing * 0.5;
     margin: 1rem 0;
     font-style: italic;
-     border-left: 4px solid map.get(theme.$theme-dark, bg-light);
+    border-left: 4px solid map.get(theme.$theme-dark, bg-light);
 
-     p {
-         padding-left: theme.$spacing * 2;
-     }
+    p {
+      padding-left: theme.$spacing * 2;
     }
   }
+}
 
-  article p {
+article {
+  p {
     line-height: 2rem;
     margin-bottom: theme.$spacing * 3;
   }
 
-  body[data-theme="dark"] {
-    background-color: map.get(theme.$theme-dark, bg);
-    background-image: url("/images/bg-dark.png");
-    color: map.get(theme.$theme-dark, text-primary);
-
+  ul, ol {
+    padding-inline-start: theme.$spacing * 4;
+    margin-bottom: theme.$spacing * 3;
   }
 
-  body[data-theme="light"] {
-    background-color: map.get(theme.$theme-light, bg);
-    background-image: none;
-    color: map.get(theme.$theme-light, text-primary);
+  p > code, li > code {
+    background-color: rgb(map.get(theme.$theme-dark, color-secondary), 0.1);
+    padding: theme.$spacing * 0.5 theme.$spacing;
+    border-radius: 4px;
+    color: map.get(theme.$theme-dark, color-secondary) !important;
+    font-family: monospace;
   }
+}
+
+pre {
+  padding: theme.$spacing * 2;
+  margin: theme.$spacing * 2 0;
+  border-radius: 4px;
+
+  code {
+    line-height: 1.5rem;
+
+    > span.line.diff {
+      padding: theme.$spacing * 2;
+      line-height: 0px;
+      display: inline-block;
+      width: 100%;
+      
+
+      &.remove {
+        background-color: rgba(255, 0, 0, 0.1) !important;
+      }
+
+      &.add {
+        background-color: rgba(0, 255, 0, 0.1) !important;
+      }
+
+      span {
+        background-color: inherit;
+        height: 100%;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+body[data-theme="dark"] {
+  background-color: map.get(theme.$theme-dark, bg);
+  color: map.get(theme.$theme-dark, text-primary);
+
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+body[data-theme="light"] {
+  background-color: map.get(theme.$theme-light, bg);
+  background-image: none;
+  color: map.get(theme.$theme-light, text-primary);
+
+  pre {
+    background-color: whitesmoke !important;
+  }
+}

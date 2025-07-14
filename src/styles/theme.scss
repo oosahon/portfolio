@@ -5,7 +5,11 @@ $theme-light: (
   color-secondary: #F6AD55,
   color-border: #E5E7EB,
   text-primary: #18181B,
-  text-secondary:#3F3F46
+  text-secondary:#3F3F46,
+  color-info: #2563EB,
+  color-success: #16A34A,
+  color-warning: #F59E0B,
+  color-error: #DC2626
 );
 
 $theme-dark: (
@@ -15,7 +19,11 @@ $theme-dark: (
   color-secondary: #F6AD55,
   color-border: #939395,
   text-primary: #FFFFFF,
-  text-secondary: #A1A1AA
+  text-secondary: #A1A1AA,
+  color-info: #2563EB,
+  color-success: #16A34A,
+  color-warning: #F59E0B,
+  color-error: #DC2626
 );
 
 
@@ -28,6 +36,8 @@ $breakpoint-2xl: 1536px; // Extra large monitors
 
 
 $spacing: 8px;
+
+$border-radius: 4px;
 
 
 @font-face {

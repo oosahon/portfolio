@@ -1,0 +1,65 @@
+---
+interface Props {
+  variant?: "info" | "success" | "warning" | "error";
+  showIcon?: boolean;
+}
+
+const { variant = "info", showIcon } = Astro.props as Props;
+---
+
+<aside class={variant}>
+  <div>
+    {
+      showIcon && (
+        <img
+          src={`/callout-${variant}.svg`}
+          alt={`${variant} icon`}
+          width="40"
+          height="40"
+        />
+      )
+    }
+  </div>
+  <div>
+    <slot />
+  </div>
+</aside>
+
+<style lang="scss">
+  @use "sass:map";
+  @use "../styles/theme.scss";
+  @use "../styles/typography.scss";
+
+  aside {
+    display: flex;
+    gap: theme.$spacing * 2;
+    border: 1px solid map.get(theme.$theme-dark, color-info);
+    border-radius: theme.$border-radius;
+    padding: theme.$spacing * 3;
+    margin: theme.$spacing * 5 0;
+
+    p {
+      font-size: typography.$font-size-body2;
+    }
+
+    &.info {
+      background-color: rgb(map.get(theme.$theme-dark, color-info), 0.1);
+      border-color: map.get(theme.$theme-dark, color-info);
+    }
+
+    &.success {
+      background-color: rgb(map.get(theme.$theme-dark, color-success), 0.1);
+      border-color: map.get(theme.$theme-dark, color-success);
+    }
+
+    &.warning {
+      background-color: rgb(map.get(theme.$theme-dark, color-warning), 0.1);
+      border-color: map.get(theme.$theme-dark, color-warning);
+    }
+
+    &.error {
+      background-color: rgb(map.get(theme.$theme-dark, color-error), 0.1);
+      border-color: map.get(theme.$theme-dark, color-error);
+    }
+  }
+</style>
