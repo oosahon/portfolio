@@ -1,0 +1,181 @@
+---
+title: "An Introduction to Building AI Agents With LangChain and TypeScript"
+pubDate: "May 21 2025"
+description: "Learn how to build AI agents using LangChain’s ReAct framework in JavaScript. This tutorial covers reasoning, tool usage, and memory, helping you create LLM-powered workflows that think and act."
+slug: "building-ai-agents-with-langchain-part-1"
+readTime: 5
+---
+
+import Callout from '../../components/Callout.astro';
+
+If you’ve not been under a rock for the past few years, you would know the AI hype is getting realer.  
+
+Some of us are even worried about our future as Software Engineers. However, like I tweeted last week, you don’t have to worry about AI taking your jobs if you employ it first.  
+
+In this series, I will show you how to do just that: employing AI (as agents).  
+
+<Callout variant='info' showIcon>
+To follow this series, you would need a good understanding of JavaScript and some basic knowledge of TypeScript.
+</Callout>
+
+## What is LangChain?
+
+[LangChain](https://www.langchain.com) is a Python and JavaScript framework for building LLM-powered applications. It provides useful tools and abstractions to simplify building complex workflows using LLMS, making it a popular option for building AI agents.
+With LangChain, we can build tools that can reason and act (ReAct agents).
+
+### What is a ReAct Agent?
+
+While AI agents are used to describe applications or programs that can autonomously perform tasks using AI models, ReAct agents combine reasoning (thinking) and acting (taking actions) in an intertwined manner.  
+
+For example, if you were to ask a ReAct agent the following question: "Which company sold the most tacos in the most populous city in Africa?" It would go through the response like so:  
+
+```plaintext
+[Start: User Question]
+        |
+        v
+[Thought] → "Find most populous city in Africa"
+        |
+        v
+[Action] → Call API / Search → "Most populous city in Africa"
+        |
+        v
+[Observation] → "Lagos, Nigeria"
+        |
+        v
+[Thought] → "Find companies selling tacos in Lagos"
+        |
+        v
+[Action] → Search for taco vendors in Lagos
+        |
+        v
+[Observation] → "Taco Bar, Tacos & Grill, etc."
+        |
+        v
+[Thought] → "Find which vendor sells the most tacos"
+        |
+        v
+[Action] → Search for sales data / reviews / popularity
+        |
+        v
+[Observation] → "Taco Bar is most mentioned and reviewed"
+        |
+        v
+[Final Answer] → "Taco Bar likely sells the most tacos in Lagos, the most populous city in Africa"
+        |
+        v
+[End]
+
+```
+
+Now, imagine if these data were not publicly available. How would your ReAct agent find the answer?
+That’s where tools come in.  
+
+### What are Tools in LangChain?
+Tools are callable functions, usually external APIs, that allow AI agents to perform specialised actions like fetching the latest articles from a headless CMS or querying a private database.  
+
+Let’s see a ReAct agent in action.  
+
+<Callout variant='info' showIcon>
+ou would need an OpenAI and Tavily API keys to run the following code.
+</Callout>
+
+Create a file `agent.ts` and paste the following code.
+
+You can find the full code here https://github.com/oosahon/ai-agent-intro
+
+```ts:agent.ts
+// This is a slightly modified version of the original code here:
+// https://js.langchain.com/docs/tutorials/llm_chain
+
+import dotenv from "dotenv";
+import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
+import { ChatOpenAI } from "@langchain/openai";
+import { MemorySaver } from "@langchain/langgraph";
+import { HumanMessage } from "@langchain/core/messages";
+import { createReactAgent } from "@langchain/langgraph/prebuilt";
+
+dotenv.config();
+
+async function main() {
+  // Define the tools for the agent to use
+  const agentTools = [new TavilySearchResults({ maxResults: 3 })];
+  const agentModel = new ChatOpenAI({ temperature: 0 });
+
+  // Initialize memory to persist state between graph runs
+  const agentCheckpointer = new MemorySaver();
+  const agent = createReactAgent({
+    llm: agentModel,
+    tools: agentTools,
+    checkpointSaver: agentCheckpointer,
+  });
+
+  // Now it's time to use!
+  const agentFinalState = await agent.invoke(
+    { messages: [new HumanMessage("what is the current weather in sf")] },
+    { configurable: { thread_id: "42" } }
+  );
+
+  console.log(
+    agentFinalState.messages[agentFinalState.messages.length - 1].content
+  );
+
+  const agentNextState = await agent.invoke(
+    { messages: [new HumanMessage("what about ny")] },
+    { configurable: { thread_id: "42" } }
+  );
+
+  console.log(
+    agentNextState.messages[agentNextState.messages.length - 1].content
+  );
+}
+
+main();
+```
+
+Create a `.env` file in the root directory and add your OpenAI API key:  
+
+
+```env
+OPENAI_API_KEY=your_openai_key_here
+TAVILY_API_KEY=your_tavily_key_here
+```
+
+
+Here is a brief rundown of what the `agent.ts` does:
+
+1. **Imports LangChain components (Lines 5-9)**: brings in tools, memory, message types, and agent utilities required to build the agent.
+2. **Defines agent tools (Line 15)**: sets up `TavilySearchResults` so that the agent can search the web when needed.
+3. **Initializes the language model (Line 16)**: initializes the language model (LLM) to be used by the agent.
+4. **Sets up memory (Line 19):** uses MemorySaver to persist the conversation history between agent runs.
+5. **Creates the agent (Lines 20 - 24):** uses `createReactAgent` to build an agent that can reason (think) and act (use tools) before responding.
+6. **Invokes the agent with a question (Lines 27-30)**: Sends an initial user message (e.g., “What is the current weather in SF?”).
+7. **Assigns a thread ID (Line 29):** Ensures the agent keeps context by tagging the conversation with a `thread_id`.
+8. **Invokes the agent with a follow-up (Lines 36-39)**: Sends a second message (e.g., “what about NY”) that continues the same conversation thread.
+9. Prints the agent’s response to the terminal (Line 41)
+
+
+Running npx tsx `agent.ts` should produce the following:
+
+```plaintext
+The current weather in San Francisco is as follows:
+- Temperature: 12.2°C (54.0°F)
+- Condition: Sunny
+- Wind: 4.7 km/h from SSW
+- Pressure: 1017.0 mb
+- Humidity: 83%
+- Visibility: 14.0 km
+- UV Index: 0.3
+
+For more details, you can visit [Weather in San Francisco](https://www.weatherapi.com/).
+For the current weather in New York, you can check the latest updates on:
+- [The Weather Network - New York, NY Current Weather](https://www.theweathernetwork.com/en/city/us/new-york/new-york/current)
+- [AccuWeather - New York, NY Current Weather](https://www.accuweather.com/en/us/new-york/10021/current-weather/349727)
+- [The Weather Channel - New York, NY Weather Forecast](https://weather.com/weather/today/l/New+York+NY?placeId=e7c5edfd862580c8215ab4ab04a7a50c93201de90f3eb98e8c956a62df0c3e49)
+osahon@Osahons-MacBook-Pro ai-agent-practice %
+```
+
+Hopefully, you now understand what AI agents and ReAct are and how LangChain can help you build them.  
+
+In subsequent tutorials, I will deep-dive into tools, chains and memory.  
+
+You can find the code sample here: https://github.com/oosahon/ai-agent-intro

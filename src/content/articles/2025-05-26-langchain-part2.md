@@ -2,7 +2,7 @@
 title: "Building AI Agents With LangChain Part II: Understanding Tools"
 pubDate: "May 26 2025"
 description: "Learn how to create and use tools in LangChain to supercharge your AI agents. This guide breaks down tool creation, usage, and integration with chat models using TypeScript."
-slug: "building-ai-agents-with-langchain-part-ii"
+slug: "building-ai-agents-with-langchain-part-2"
 readTime: 3
 ---
 
