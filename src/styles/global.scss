@@ -45,6 +45,10 @@ article {
   ol {
     padding-inline-start: theme.$spacing * 4;
     margin-bottom: theme.$spacing * 3;
+
+    li {
+      margin-bottom: theme.$spacing * 2;
+    }
   }
 
   p > code,
@@ -128,6 +132,19 @@ pre {
       font-weight: inherit;
     }
   }
+
+      &[data-language="plaintext"] {
+        
+
+      .line{
+        padding-left: 0;
+
+        &::after {
+          display: none;
+        }
+       
+      }
+    }
 }
 
 body[data-theme="dark"] {
