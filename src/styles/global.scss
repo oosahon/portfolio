@@ -17,11 +17,11 @@
 body {
   background-color: map.get(theme.$theme-dark, bg);
   background-attachment: fixed;
-  font-family: "Inter", sans-serif;
-  min-height: 100vh;
   background-size: cover;
-  margin: 0;
   color: map.get(theme.$theme-dark, text-primary);
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  min-height: 100vh;
 
   blockquote {
     padding-left: theme.$spacing * 0.5;
@@ -41,12 +41,14 @@ article {
     margin-bottom: theme.$spacing * 3;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-inline-start: theme.$spacing * 4;
     margin-bottom: theme.$spacing * 3;
   }
 
-  p > code, li > code {
+  p > code,
+  li > code {
     background-color: rgb(map.get(theme.$theme-dark, color-secondary), 0.1);
     padding: theme.$spacing * 0.5 theme.$spacing;
     border-radius: 4px;
@@ -68,7 +70,6 @@ pre {
       line-height: 0px;
       display: inline-block;
       width: 100%;
-      
 
       &.remove {
         background-color: rgba(255, 0, 0, 0.1) !important;
@@ -83,6 +84,48 @@ pre {
         height: 100%;
         display: inline-block;
       }
+    }
+  }
+}
+
+.shiki.has-line-numbers {
+  counter-reset: lineNumber;
+  padding-left: 3.5em;
+  position: relative;
+}
+
+.shiki.has-line-numbers .code-line::before {
+  counter-increment: lineNumber;
+  content: counter(lineNumber);
+  position: absolute;
+  left: -3.5em;
+  width: 3em;
+  text-align: right;
+  color: rgba(107, 114, 128, 0.5);
+  user-select: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.astro-code {
+  counter-reset: lineNumber;
+
+  .line {
+    padding-left: theme.$spacing * 3;
+    position: relative;
+
+    &::after {
+      counter-increment: lineNumber;
+      content: counter(lineNumber);
+      position: absolute;
+      left: theme.$spacing * -3;
+      width: theme.$spacing * 4;
+      color: inherit;
+      opacity: 0.5;
+      text-align: right;
+      user-select: none;
+      font-size: inherit;
+      font-weight: inherit;
     }
   }
 }
@@ -105,6 +148,10 @@ body[data-theme="light"] {
   background-color: map.get(theme.$theme-light, bg);
   background-image: none;
   color: map.get(theme.$theme-light, text-primary);
+
+  .astro-code.line::after {
+    color: map.get(theme.$theme-light, text-secondary);
+  }
 
   pre {
     background-color: whitesmoke !important;
