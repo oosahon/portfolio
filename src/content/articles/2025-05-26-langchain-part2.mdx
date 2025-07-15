@@ -1,0 +1,202 @@
+---
+title: "Building AI Agents With LangChain Part II: Understanding Tools"
+pubDate: "May 26 2025"
+description: "Learn how to create and use tools in LangChain to supercharge your AI agents. This guide breaks down tool creation, usage, and integration with chat models using TypeScript."
+slug: "building-ai-agents-with-langchain-part-2"
+readTime: 3
+---
+
+import Callout from '../../components/Callout.astro'
+
+[Previously](/articles/building-ai-agents-with-langchain-part-1), we looked at AI agents, including ReAct agents, and introduced LangChain. In this lesson, we will focus on one of LangChain’s most powerful features by looking at what tools are, how they work, and how to use them.
+
+From the previous tutorial, we saw the following piece of code:  
+
+```ts:agent.ts
+// This is a slightly modified version of the original code here:
+// https://js.langchain.com/docs/tutorials/llm_chain
+
+import dotenv from "dotenv";
+import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
+import { ChatOpenAI } from "@langchain/openai";
+import { MemorySaver } from "@langchain/langgraph";
+import { HumanMessage } from "@langchain/core/messages";
+import { createReactAgent } from "@langchain/langgraph/prebuilt";
+
+dotenv.config();
+
+async function main() {
+  // Define the tools for the agent to use
+  const agentTools = [new TavilySearchResults({ maxResults: 3 })];
+  const agentModel = new ChatOpenAI({ temperature: 0 });
+
+  // Initialize memory to persist state between graph runs
+  const agentCheckpointer = new MemorySaver();
+  const agent = createReactAgent({
+    llm: agentModel,
+    tools: agentTools,
+    checkpointSaver: agentCheckpointer,
+  });
+
+  // Now it's time to use!
+  const agentFinalState = await agent.invoke(
+    { messages: [new HumanMessage("what is the current weather in sf")] },
+    { configurable: { thread_id: "42" } }
+  );
+
+  console.log(
+    agentFinalState.messages[agentFinalState.messages.length - 1].content
+  );
+
+  const agentNextState = await agent.invoke(
+    { messages: [new HumanMessage("what about ny")] },
+    { configurable: { thread_id: "42" } }
+  );
+
+  console.log(
+    agentNextState.messages[agentNextState.messages.length - 1].content
+  );
+}
+
+main();
+```
+
+On `line 15` we defined the list of tools for our agent.
+When we ran npm tsx agent.ts our AI agent used a provided tool, `TavilySearchResults` to search the internet for the latest weather report.  
+
+That’s what tools are — utility functions for your AI agent.  
+
+In LangChain, tools are functions with a well-defined input and output interface that can be called by agents or chat models ([that support tool calling](https://python.langchain.com/docs/integrations/chat/#featured-providers)) to perform specific, often external, tasks such as API calls, calculations, or database queries.  
+
+### How to Create a Tool in LangChain
+
+LangChain provides a `tool` wrapper function (or a factory, if you like) for creating tools.  
+This factory method takes a function as the first parameter and a config object as the second.
+
+```ts:multiplication-tool.ts
+import { tool } from "@langchain/core/tools";
+import { z } from "zod";
+
+const schema = z.object({
+  a: z.number(),
+  b: z.number(),
+});
+
+type Input = z.infer<typeof schema>;
+
+const multiply = ({ a, b }: Input) => {
+  return Promise.resolve(a * b);
+};
+
+export const multiplicationTool = tool(multiply, {
+  schema,
+  name: "multiplication_tool",
+  description: "Perfect for multiplying two numbers.",
+  responseFormat: "content",
+  verboseParsingErrors: true,
+  verbose: true,
+});
+```
+
+Let’s take a closer look at the config object:  
+
+- **schema**: LangChain supports schema definition with [zod](https://www.npmjs.com/package/zod), providing information about the shape of the tool’s input to the chat model so that it can be called properly.  
+- **name**: a continuous string (no space or special characters) used to reference the tool.  
+- **description**: optional but highly recommended. The description provides more details about the tool, enabling the chat model to know when to call the tool.  
+
+Other parameters, not covered in this chapter, but surely in subsequent articles, include:  
+
+- **callbacks**: a list of callback event handlers
+- **metadata**: pass additional data to your tool that can be used for logging, monitoring, tool selection logic, etc.
+- **responseFormat**: `content | content_and_artifact` The default is `content`. If `content_and_artifact` is passed, then the output is expected to be a two-tuple corresponding to the (content, artifact) of a ToolMessage. ([Learn more](https://js.langchain.com/docs/how_to/tool_artifacts/))
+- **returnDirect**: When set to `true`, the agent would return the tool’s response as-is, skipping further reasoning. The default is `false`
+- **tags**: an array of strings used for organization purposes without altering the tool’s behaviour
+- **verbose**: when set to `true`, it would log the input, output and step-by-step execution of the tool.
+- **verboseParsingErrors**: similar to `verbose`, but for errors within the tool.
+
+### Tools usage
+
+Tools can be called inside or outside the context of a chat model.  
+
+The `invoke` method of a tool allows you to call it like you would a regular function, like so:
+
+```ts
+multiplicationTool.invoke({ a: 2, b: 3}) // 6
+```
+
+However, within the context of a chat model that supports the tool calling API, the chat model knows the right tool to use using the `description` of the tool.  
+
+Let us use our multiplication tool.
+
+Update your `agent.ts` file to look like so:  
+
+<Callout showIcon>
+You can find the full code here: https://github.com/oosahon/ai-agent-intro/tree/custom-tool
+</Callout>
+
+```ts
+import dotenv from "dotenv";
+- import { TavilySearchResults } from "@langchain/community/tools/tavily_search"; // [!code --]
+import { ChatOpenAI } from "@langchain/openai";
+import { MemorySaver } from "@langchain/langgraph";
+import { HumanMessage } from "@langchain/core/messages";
+import { createReactAgent } from "@langchain/langgraph/prebuilt";
+import { multiplicationTool } from "./multiplication-tool";
++ import { multiplicationTool } from "./multiplication-tool"; // [!code ++]
+
+dotenv.config();
+
+async function main() {
+  const agentTools = [multiplicationTool];
+  const agentModel = new ChatOpenAI({ temperature: 0 });
+
+  const agentCheckpointer = new MemorySaver();
+  const agent = createReactAgent({
+    llm: agentModel,
+    tools: agentTools,
+    checkpointSaver: agentCheckpointer,
+  });
+
+  const agentFinalState = await agent.invoke(
+    - { messages: [new HumanMessage("what is the current weather in sf")] }, // [!code --]
+    - { configurable: { thread_id: "42" } } // [!code --]
+    + { messages: [new HumanMessage("Multiply 4 and 9")] }, // [!code ++]
+    + { configurable: { thread_id: "5" } } // [!code ++]
+  );
+
+  console.log(
+    agentFinalState.messages[agentFinalState.messages.length - 1].content
+  );
+}
+
+main();
+```
+
+Running this code should yield the following:
+
+```plaintext
+[tool/start] [1:tool:tools] Entering Tool run with input: "{"a":4,"b":9}"
+[tool/end] [1:tool:tools] [3ms] Exiting Tool run with output: "{
+  "lc": 1,
+  "type": "constructor",
+  "id": [
+    "langchain_core",
+    "messages",
+    "ToolMessage"
+  ],
+  "kwargs": {
+    "content": "36",
+    "tool_call_id": "call_RxF7OgbDutBPpK9HZHvaCOQB",
+    "name": "multiplication_tool",
+    "additional_kwargs": {},
+    "response_metadata": {}
+  }
+}"
+The result of multiplying 4 and 9 is 36.
+```
+
+As you can see, the chat model used our tool.  
+
+Go ahead, play around and try to break things!
+
+Now that you are familiar with tools, in the next section, we will take a look at memories and how to make your AI agent aware of previous conversations, improving performance.  

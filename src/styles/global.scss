@@ -77,10 +77,18 @@ pre {
 
       &.remove {
         background-color: rgba(255, 0, 0, 0.1) !important;
+
+        span:nth-child(1) {
+          color: rgba(255, 0, 0, 0.7) !important;
+        }
       }
 
       &.add {
         background-color: rgba(0, 255, 0, 0.1) !important;
+
+        span:nth-child(1) {
+          color: rgba(0, 255, 0, 0.7) !important;
+        }
       }
 
       span {
@@ -133,18 +141,15 @@ pre {
     }
   }
 
-      &[data-language="plaintext"] {
-        
+  &[data-language="plaintext"] {
+    .line {
+      padding-left: 0;
 
-      .line{
-        padding-left: 0;
-
-        &::after {
-          display: none;
-        }
-       
+      &::after {
+        display: none;
       }
     }
+  }
 }
 
 body[data-theme="dark"] {
