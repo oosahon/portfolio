@@ -6,7 +6,7 @@
 
     <div>
       <label id="theme-switch">
-        <input type="checkbox" class="theme-checkbox" />
+        <input name="theme-switch" type="checkbox" class="theme-checkbox" />
         <span class="theme-slider">
           <span>☀️</span>
           <span>🌙</span>
@@ -96,6 +96,13 @@
 
 <script>
   document.querySelector("#theme-switch")?.addEventListener("change", () => {
+    let preferences = {};
+
+    try {
+      const savedPreferences = localStorage.getItem("preferences") ?? "{}";
+      preferences = JSON.parse(savedPreferences);
+    } catch (e) {}
+
     const body = document.querySelector("body");
     const logo = document.querySelector("#logo");
 
@@ -113,6 +120,11 @@
         block.classList.remove("github-light");
         block.classList.add("github-dark");
       });
+
+      window.localStorage.setItem(
+        "preferences",
+        JSON.stringify({ ...preferences, theme: "light" })
+      );
     } else {
       body.setAttribute("data-theme", "dark");
       logo?.setAttribute("src", "/logo-light.svg");
@@ -121,6 +133,11 @@
         block.classList.remove("github-dark");
         block.classList.add("github-light");
       });
+
+      window.localStorage.setItem(
+        "preferences",
+        JSON.stringify({ ...preferences, theme: "dark" })
+      );
     }
   });
 </script>
