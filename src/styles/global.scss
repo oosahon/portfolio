@@ -76,18 +76,22 @@ pre {
       width: 100%;
 
       &.remove {
-        background-color: rgba(255, 0, 0, 0.1) !important;
+        background-color: rgba(255, 0, 0, 0.1) !important; 
 
-        span:nth-child(1) {
-          color: rgba(255, 0, 0, 0.7) !important;
+        &::before {
+          content: "-";
+           color: rgba(255, 0, 0, 0.7);
         }
       }
 
       &.add {
         background-color: rgba(0, 255, 0, 0.1) !important;
+        position: relative;
 
-        span:nth-child(1) {
-          color: rgba(0, 255, 0, 0.7) !important;
+
+        &::before {
+          content: "+";
+          color: rgba(0, 255, 0, 0.7);
         }
       }
 

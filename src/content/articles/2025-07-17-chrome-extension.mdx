@@ -1,0 +1,107 @@
+---
+title: "Chrome Extension Basics: Creating and Loading Your First Extension"
+pubDate: "Jul 17 2025"
+description: "Learn how to build your first Chrome Extension from scratch. In this beginner-friendly guide, you'll create a simple \"Hello World\" extension and understand the basics of the manifest.json file and how to load your extension in Chrome."
+slug: "building-a-chrome-extension-part-1"
+readTime: 3
+---
+
+import Callout from '../../components/Callout.astro';
+
+If you've ever wanted to build a Chrome Extension but don't know where to start, this series is for you. I will walk you through the concepts of a Chrome Extension -- service workers, content script, communication within a Chrome Extension and more.  
+
+Let's jump right into it!  
+
+Before I take you through the concepts of a Chrome Extension, I would like us to create our very first extension: a simple extension that displays "Hello, world" when you open a new tab.  
+
+<Callout variant='success'>
+    **What you will learn**  
+    - Declaring a Chrome Extension using a `manifest.json`  file
+    - Loading an unpacked extension in dev mode.
+</Callout>
+
+
+If you've ever built a web application, you would may know about `package.json`  or  `pyproject`  if you are coming from Python. Notwithstanding, a `manifest.json` simply describes the properties of a Chrome Extension. We will see more of it later, but for now, let's describe our simple Chrome extension that prints "Hello, world."  
+
+Create a new project and name it whatever you like. I will name mine `my-extension`.  
+
+Inside that project, create a manifest.json  file and paste the following:
+
+```json
+{
+  "manifest_version": 3,
+  "name": "New Tab Extension",
+  "version": "0.1.0",
+  "description": "A simple extension that changes the content of a Chrome tab."
+}
+```
+
+Let's go over each property:  
+
+- `manifest_version` (required): specifies the manifest's version. 3 is the latest version. So, you should always use this as earlier versions have been deprecated.
+- `name` (required): the name of your extension as it will appear in the Chrome Web Store and in the Extensions page.
+- `version` (required): the version of your extension, following semantic versioning (MAJOR.MINOR.PATCH). Learn more about versioning [here](https://developer.chrome.com/docs/extensions/reference/manifest/version)
+- `description` (optional): a brief description of your extension's functionality.
+
+And there you have it...your very own Chrome Extension. Yes, it does not do anything now, but it's a Chrome Extension nonetheless.  
+
+Now, let's load this on the browser.
+
+<video controls width="100%" height="auto">
+  <source src="/2025-07-17-chrome-extension-loading-chrome-extension.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+Our Chrome extension has been loaded, but it currently does nothing.  
+
+Let's print "Hello, world when you open a new tab. 
+
+Update your `manifest.json` like so:
+
+```json
+{
+  "manifest_version": 3,
+  "name": "New Tab Extension",
+  "version": "0.1.0",
+  "description": "A simple extension that changes the content of a Chrome tab.",
+  "chrome_url_overrides": { // [!code ++]
+    "newtab": "newtab.html" // [!code ++]
+  } // [!code ++]
+}
+```
+
+Create a new file called `newtab.html` and add the following: 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+</head>
+<body>
+  <h1>Hello World</h1>
+</body>
+</html>
+```
+
+
+Now, reload your extension in the Chrome Extensions page.  
+
+When you open a new tab, you should see "Hello World" displayed!
+
+
+<video controls width="100%" height="auto">
+  <source src="/2025-07-17-chrome-extension-hello-world.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+🎉 Congratulations! You’ve just built and loaded your first Chrome Extension. It may be simple, but this “Hello World” lays the foundation for everything that comes next.  
+
+In the next part, we’ll dive into the real engine of Chrome Extensions (Service Workers and Content Scripts), the tools that bring interactivity, automation, and power to your extension.
+
+Let’s go from “Hello World” to something truly useful. See you in Part 2!
+
+
+
