@@ -4,10 +4,11 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Body from "../components/Body.astro";
 import ArticleTitle from "../components/ArticleTitle.astro";
+import ArticleLink from "../components/ArticleLink.astro";
 
 type Props = CollectionEntry<"article">["data"];
 
-const { title, description, pubDate, updatedDate, readTime } = Astro.props;
+const { title, description, previous, next } = Astro.props;
 ---
 
 <html lang="en">
@@ -22,6 +23,14 @@ const { title, description, pubDate, updatedDate, readTime } = Astro.props;
         <ArticleTitle {...Astro.props} />
         <slot />
       </article>
+      <div class="article-links">
+        <div>
+          {previous && <ArticleLink type="previous" slug={previous} />}
+        </div>
+        <div>
+          {next && <ArticleLink type="next" slug={next} />}
+        </div>
+      </div>
     </main>
   </Body>
 </html>
@@ -32,5 +41,16 @@ const { title, description, pubDate, updatedDate, readTime } = Astro.props;
 
   main {
     @include mixins.contentArea;
+
+    .article-links {
+      display: flex;
+      justify-content: space-between;
+      gap: theme.$spacing;
+      margin-top: theme.$spacing * 12;
+
+      > div {
+        width: 50%;
+      }
+    }
   }
 </style>

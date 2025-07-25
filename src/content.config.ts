@@ -12,6 +12,8 @@ const article = defineCollection({
       readTime: z.number().optional(),
       updatedDate: z.coerce.date().optional(),
       external: z.boolean().optional(),
+      next: z.string().optional(),
+      previous: z.string().optional()
     }),
 });
 export const collections = { article };

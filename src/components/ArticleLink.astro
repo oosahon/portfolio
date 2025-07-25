@@ -1,0 +1,60 @@
+---
+interface Props {
+  type: "previous" | "next";
+  slug: string;
+}
+
+import { getCollection } from "astro:content";
+
+const { type, slug } = Astro.props as Props;
+
+const articles = await getCollection("article");
+
+const article = articles.find((a) => a.id === slug);
+---
+
+{
+  article && (
+    <a href={`/articles/${article.id}`} class:list={["article-link", type]}>
+      <div>
+        {type === "next" ? (
+          <img width="40" src="/arrow-right.svg" alt="arrow right" />
+        ) : (
+          <img width="40" src="/arrow-left.svg" alt="arrow left" />
+        )}
+      </div>
+      <div>
+        <p class="secondary">{type == "next" ? "Next" : "Previous"}</p>
+        <p class="secondary">{article?.data.title}</p>
+      </div>
+    </a>
+  )
+}
+
+<style lang="scss">
+  @use "../styles/theme.scss";
+  @use "../styles/typography.scss";
+
+  a.article-link {
+    display: flex;
+    gap: theme.$spacing;
+    text-decoration: none;
+
+    p {
+      font-size: typography.$font-size-body2;
+      font-weight: typography.$font-weight-semibold;
+
+      &:first-of-type {
+        font-weight: typography.$font-weight-light;
+        font-size: typography.$font-size-caption;
+      }
+    }
+
+    &.next {
+      justify-content: flex-end;
+      text-align: right;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+  }
+</style>

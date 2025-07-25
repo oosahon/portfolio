@@ -3,11 +3,17 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} osahon.dev. All rights reserved.
+  <p class="secondary caption" >
+    &copy; {today.getFullYear()} osahon.dev. All rights reserved.
+  </p>
+  
 </footer>
-<style>
+<style lang="scss">
+    @use "../styles/theme.scss";
+
   footer {
-    padding: 2em 1em 6em 1em;
+    padding: theme.$spacing * 2;
+    margin-top: theme.$spacing * 15;
     background: linear-gradient(var(--gray-gradient)) no-repeat;
     color: rgb(var(--gray));
     text-align: center;
