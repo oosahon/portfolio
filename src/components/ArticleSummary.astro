@@ -1,45 +1,45 @@
 ---
-import FormattedDate from "./FormattedDate.astro";
+import FormattedDate from './FormattedDate.astro';
 
 interface Props {
-  title: string;
-  date: Date;
-  id: string;
-  description: string;
+	title: string;
+	date: Date;
+	id: string;
+	description: string;
 }
 
 const { title, date, description, id } = Astro.props;
 ---
 
 <div>
-  <a href={`/articles/${id}`}>
-    <h2>{title}</h2>
-    <FormattedDate date={date} />
-    <p class="secondary body2">{description}</p>
-  </a>
+	<a href={`/articles/${id}`}>
+		<h2>{title}</h2>
+		<FormattedDate date={date} />
+		<p class="secondary body2">{description}</p>
+	</a>
 </div>
 
 <style lang="scss">
-  @use "sass:map";
-  @use "../styles/theme.scss";
-  @use "../styles/typography.scss";
+	@use 'sass:map';
+	@use '../styles/theme.scss';
+	@use '../styles/typography.scss';
 
-  a {
-    text-decoration: none;
-  }
+	a {
+		text-decoration: none;
+	}
 
-  h2 {
-    font-size: typography.$font-size-h3;
-    font-weight: typography.$font-weight-bold;
-  }
+	h2 {
+		font-size: typography.$font-size-h3;
+		font-weight: typography.$font-weight-bold;
+	}
 
-  p {
-    margin-top: theme.$spacing;
-  }
+	p {
+		margin-top: theme.$spacing;
+	}
 
-  @media (max-width: theme.$breakpoint-md) {
-    h2 {
-      font-size: typography.$font-size-h4;
-    }
-  }
+	@media (max-width: theme.$breakpoint-md) {
+		h2 {
+			font-size: typography.$font-size-h4;
+		}
+	}
 </style>

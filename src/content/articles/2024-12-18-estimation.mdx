@@ -1,16 +1,16 @@
 ---
-title: "Estimation Techniques for Software Engineers"
-pubDate: "Dec 18 2024"
-description: "This article explores the three-point estimation technique (Optimistic, Most Likely, Pessimistic) to help software engineers move beyond gut feeling and deliver data-driven, reliable timelines."
-slug: "estimation-techniques-for-software-engineers"
+title: 'Estimation Techniques for Software Engineers'
+pubDate: 'Dec 18 2024'
+description: 'This article explores the three-point estimation technique (Optimistic, Most Likely, Pessimistic) to help software engineers move beyond gut feeling and deliver data-driven, reliable timelines.'
+slug: 'estimation-techniques-for-software-engineers'
 readTime: 3
 ---
 
-import Tldr from '../../components/Tldr.astro'
+import Tldr from '../../components/Tldr.astro';
 
-This week, we will be looking into a crucial but often overlooked aspect of software engineering – the art of estimation. Unlike our usual deep dives into front-end engineering, today we delve into a soft skill that is, if not more, equally vital in our ever-evolving field.  
+This week, we will be looking into a crucial but often overlooked aspect of software engineering – the art of estimation. Unlike our usual deep dives into front-end engineering, today we delve into a soft skill that is, if not more, equally vital in our ever-evolving field.
 
-By the end of this newsletter, you will have a more systematic approach to providing estimates for your tasks, one rooted in data rather than relying on gut feelings.  
+By the end of this newsletter, you will have a more systematic approach to providing estimates for your tasks, one rooted in data rather than relying on gut feelings.
 
 <Tldr>
 Employ the three-point estimation techniques when providing task estimates. This technique uses the following formula:
@@ -28,24 +28,26 @@ Where:
 `M` is the most likely estimate
 
 `P` is the pessimistic estimate
+
 </Tldr>
 
 ### The Challenge
 
-As a Software Engineer, a lot of the things you would be involved in giving estimates, a lot of it. However, like many engineers, I had never sought a systematic way of providing estimates. Most estimates were determined by gut feeling or, worse, based on optimism or pessimism.  
+As a Software Engineer, a lot of the things you would be involved in giving estimates, a lot of it. However, like many engineers, I had never sought a systematic way of providing estimates. Most estimates were determined by gut feeling or, worse, based on optimism or pessimism.
 
-A couple of weeks ago, I asked for “One more day” one too many times. It was a terrible way to manage stakeholders’ expectations. Also, it did not give the impression that I was in control of the situation. This inability to not grossly underestimate or overestimate tasks also affects the way we set personal goals.  
+A couple of weeks ago, I asked for “One more day” one too many times. It was a terrible way to manage stakeholders’ expectations. Also, it did not give the impression that I was in control of the situation. This inability to not grossly underestimate or overestimate tasks also affects the way we set personal goals.
 
 So, what did I do when I got frustrated from asking for an additional day one too many times? I sought advice from my engineering manager, who suggested several techniques, but I will share the one that stood out.
 
 ### The Solution
+
 There are multiple project estimation techniques that you can use for a task (see [Six Techniques for Project Planning](https://asana.com/resources/estimation-methods)).
 
-As I mentioned earlier, one technique caught my attention — the three-point estimation technique. The expected estimate is the average of three estimates — the optimistic estimate, the most likely estimate and the pessimistic estimate. So, assuming you are asked to implement a file viewer component with panning, zooming and all that fun stuff without a third-party library.  
+As I mentioned earlier, one technique caught my attention — the three-point estimation technique. The expected estimate is the average of three estimates — the optimistic estimate, the most likely estimate and the pessimistic estimate. So, assuming you are asked to implement a file viewer component with panning, zooming and all that fun stuff without a third-party library.
 
-Your optimistic, most likely and pessimistic might be 2, 6 and 13 days, respectively. The average of this would be 7 days.  
+Your optimistic, most likely and pessimistic might be 2, 6 and 13 days, respectively. The average of this would be 7 days.
 
-This could be represented with the formula:  
+This could be represented with the formula:
 
 $$
  E = (O + 4M + P)/6
@@ -61,17 +63,17 @@ Where:
 
 `P` is the pessimistic estimate
 
-If you paid attention to the formula in the tl;dr section, you would notice it is different to this. So, the question is, “Why?”  
+If you paid attention to the formula in the tl;dr section, you would notice it is different to this. So, the question is, “Why?”
 
-This is called the Simple Mean or Triangular Estimate. The other formula (the one in the tl;dr section) is the more commonly used technique, and it is called the Weighted or Program Evaluation and Review Technique (PERT).  
+This is called the Simple Mean or Triangular Estimate. The other formula (the one in the tl;dr section) is the more commonly used technique, and it is called the Weighted or Program Evaluation and Review Technique (PERT).
 
-The idea of the PERT is to give more “weight” to the most likely estimate by multiplying it by 4. So, the expected estimate becomes the average of:  
+The idea of the PERT is to give more “weight” to the most likely estimate by multiplying it by 4. So, the expected estimate becomes the average of:
 
 $$
 O + M + M + M + M + P
 $$
 
-So our new formula becomes:  
+So our new formula becomes:
 
 $$
 E = (O + M + M + M + M + P)/6
@@ -83,15 +85,15 @@ $$
 E = (O + 4M + P)/6
 $$
 
+Your next question might be, "Why ‘4’ and not some arbitrary number like 10?"
 
-Your next question might be, "Why ‘4’ and not some arbitrary number like 10?"  
-
-While the choice of 4 might seem arbitrary without this context, it is based on statistical modelling assumptions and provides reasonable estimates for a wide range of project scenarios. ([Learn more here.](http://deepfriedbrainproject.com/2010/07/pert-formula.html))  
+While the choice of 4 might seem arbitrary without this context, it is based on statistical modelling assumptions and provides reasonable estimates for a wide range of project scenarios. ([Learn more here.](http://deepfriedbrainproject.com/2010/07/pert-formula.html))
 
 ### Conclusion
-In this edition of What I Learnt Last Week, I discussed software engineers' challenges when estimating projects. I introduced the three-point estimation technique as a solution to this problem.  
 
-I also stated that the number 4 in the `PERT` formula is based on probability theory to achieve balanced and reliable estimation.  
+In this edition of What I Learnt Last Week, I discussed software engineers' challenges when estimating projects. I introduced the three-point estimation technique as a solution to this problem.
+
+I also stated that the number 4 in the `PERT` formula is based on probability theory to achieve balanced and reliable estimation.
 
 I hope this helps you with your future estimations and “guesstimations.” Happy estimating! 🎉
 

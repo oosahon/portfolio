@@ -1,61 +1,61 @@
 ---
-import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Body from "../components/Body.astro";
-import Header from "../components/Header.astro";
-import AboutMe from "../components/AboutMe.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import ArticleSummary from "../components/ArticleSummary.astro";
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Body from '../components/Body.astro';
+import Header from '../components/Header.astro';
+import AboutMe from '../components/AboutMe.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import ArticleSummary from '../components/ArticleSummary.astro';
 
-const articles = (await getCollection("article")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const articles = (await getCollection('article')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
 <html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <Body>
-    <Header />
-    <AboutMe />
-    <main>
-      {
-        articles.map((article) => (
-          <ArticleSummary
-            id={article.id}
-            title={article.data.title}
-            date={article.data.pubDate}
-            description={article.data.description}
-          />
-        ))
-      }
-    </main>
-    <!-- <Footer /> -->
-  </Body>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<Body>
+		<Header />
+		<AboutMe />
+		<main>
+			{
+				articles.map((article) => (
+					<ArticleSummary
+						id={article.id}
+						title={article.data.title}
+						date={article.data.pubDate}
+						description={article.data.description}
+					/>
+				))
+			}
+		</main>
+		<!-- <Footer /> -->
+	</Body>
 </html>
 
 <style lang="scss">
-  @use "../styles/theme.scss";
-  @use "../styles/mixins.scss";
+	@use '../styles/theme.scss';
+	@use '../styles/mixins.scss';
 
-  main {
-    @include mixins.contentArea;
-    display: flex;
-    padding-top: theme.$spacing * 10;
-    flex-direction: column;
-    gap: theme.$spacing * 8;
+	main {
+		@include mixins.contentArea;
+		display: flex;
+		padding-top: theme.$spacing * 10;
+		flex-direction: column;
+		gap: theme.$spacing * 8;
 
-    section.about-me {
-      width: 50%;
-    }
+		section.about-me {
+			width: 50%;
+		}
 
-    header.profile {
-      align-self: flex-start;
-      width: 50%;
-      display: block;
-      position: sticky;
-      top: calc(67px + calc(theme.$spacing * 11));
-    }
-  }
+		header.profile {
+			align-self: flex-start;
+			width: 50%;
+			display: block;
+			position: sticky;
+			top: calc(67px + calc(theme.$spacing * 11));
+		}
+	}
 </style>

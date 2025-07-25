@@ -1,40 +1,42 @@
-@use "./theme.scss";
+@use './theme.scss';
 
 @mixin responsive($breakpoint) {
-  @if $breakpoint == mobile {
-    @media (max-width: 600px) { @content; }
-  } @else if $breakpoint == tablet {
-    @media (max-width: 900px) { @content; }
-  }
+	@if $breakpoint == mobile {
+		@media (max-width: 600px) {
+			@content;
+		}
+	} @else if $breakpoint == tablet {
+		@media (max-width: 900px) {
+			@content;
+		}
+	}
 }
 
-
 @mixin heading($size, $weight: 700, $lineHeight: 1.2) {
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
+	font-size: $size;
+	font-weight: $weight;
+	line-height: $lineHeight;
 }
 
 @mixin text($size: $font-size-body1, $weight: $font-weight-regular) {
-  font-size: size;
+	font-size: size;
 }
 
-
 @mixin themeTransition() {
-    transition:
-      background-color 0.4s ease,
-      color 0.4s ease;
+	transition:
+		background-color 0.4s ease,
+		color 0.4s ease;
 }
 
 @mixin contentArea() {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  padding: theme.$spacing * 3;
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	padding: theme.$spacing * 3;
 }
 
 @mixin container() {
-    max-width: theme.$breakpoint-xl;
-    margin: auto;
-    padding: theme.$spacing * 3;
+	max-width: theme.$breakpoint-xl;
+	margin: auto;
+	padding: theme.$spacing * 3;
 }

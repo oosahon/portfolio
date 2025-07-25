@@ -1,55 +1,52 @@
 $theme-light: (
-  bg: #ffffff,
-  bg-light: #FDFEFE,
-  color-primary: #b0c0d0,
-  color-secondary: #F6AD55,
-  color-border: #E5E7EB,
-  text-primary: #18181B,
-  text-secondary:#3F3F46,
-  color-info: #2563EB,
-  color-success: #16A34A,
-  color-warning: #F59E0B,
-  color-error: #DC2626
+	bg: #ffffff,
+	bg-light: #fdfefe,
+	color-primary: #b0c0d0,
+	color-secondary: #f6ad55,
+	color-border: #e5e7eb,
+	text-primary: #18181b,
+	text-secondary: #3f3f46,
+	color-info: #2563eb,
+	color-success: #16a34a,
+	color-warning: #f59e0b,
+	color-error: #dc2626,
 );
 
 $theme-dark: (
-  bg: #09090B,
-  bg-light: #202123,
-  color-primary: #171C28,
-  color-secondary: #F6AD55,
-  color-border: #939395,
-  text-primary: #FFFFFF,
-  text-secondary: #A1A1AA,
-  color-info: #2563EB,
-  color-success: #16A34A,
-  color-warning: #F59E0B,
-  color-error: #DC2626
+	bg: #09090b,
+	bg-light: #202123,
+	color-primary: #171c28,
+	color-secondary: #f6ad55,
+	color-border: #939395,
+	text-primary: #ffffff,
+	text-secondary: #a1a1aa,
+	color-info: #2563eb,
+	color-success: #16a34a,
+	color-warning: #f59e0b,
+	color-error: #dc2626,
 );
 
-
-$breakpoint-xs: 0;       // Extra small (mobile)
-$breakpoint-sm: 480px;   // Small phones
-$breakpoint-md: 768px;   // Tablets / Small desktops
-$breakpoint-lg: 1024px;  // Laptops
-$breakpoint-xl: 1280px;  // Large desktops
+$breakpoint-xs: 0; // Extra small (mobile)
+$breakpoint-sm: 480px; // Small phones
+$breakpoint-md: 768px; // Tablets / Small desktops
+$breakpoint-lg: 1024px; // Laptops
+$breakpoint-xl: 1280px; // Large desktops
 $breakpoint-2xl: 1536px; // Extra large monitors
-
 
 $spacing: 8px;
 
 $border-radius: 4px;
 
-
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
+	font-family: 'Inter';
+	src: url('/fonts/Inter.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Italic.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: italic;
+	font-family: 'Inter';
+	src: url('/fonts/Inter-Italic.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
 }

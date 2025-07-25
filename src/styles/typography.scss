@@ -1,6 +1,6 @@
-@use "sass:map";
-@use "./theme.scss";
-@use "./mixins.scss";
+@use 'sass:map';
+@use './theme.scss';
+@use './mixins.scss';
 
 $font-size-h1: 3rem;
 $font-size-h2: 2.5rem;
@@ -30,145 +30,145 @@ $font-weight-bold: 700;
 $font-weight-bolder: 900;
 
 h1 {
-  font-size: $font-size-h1;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-h1;
+	font-size: $font-size-h1;
+	font-weight: $font-weight-bold;
+	line-height: $line-height-h1;
 }
 
 h2 {
-  font-size: $font-size-h2;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-h2;
+	font-size: $font-size-h2;
+	font-weight: $font-weight-bold;
+	line-height: $line-height-h2;
 }
 
 h3 {
-  font-size: $font-size-h3;
-  font-weight: $font-weight-semibold;
-  line-height: $line-height-h3;
+	font-size: $font-size-h3;
+	font-weight: $font-weight-semibold;
+	line-height: $line-height-h3;
 }
 
 h4 {
-  font-size: $font-size-h4;
-  font-weight: $font-weight-semibold;
-  line-height: $line-height-h4;
+	font-size: $font-size-h4;
+	font-weight: $font-weight-semibold;
+	line-height: $line-height-h4;
 }
 
 h5 {
-  font-size: $font-size-h5;
-  font-weight: $font-weight-medium;
-  line-height: $line-height-h5;
+	font-size: $font-size-h5;
+	font-weight: $font-weight-medium;
+	line-height: $line-height-h5;
 }
 
 h6 {
-  font-size: $font-size-h6;
-  font-weight: $font-weight-medium;
-  line-height: $line-height-h6;
+	font-size: $font-size-h6;
+	font-weight: $font-weight-medium;
+	line-height: $line-height-h6;
 }
 
 p,
 li,
 a,
 p.body1 {
-  font-size: $font-size-body1;
-  font-weight: $font-weight-regular;
-  line-height: $line-height-body1;
+	font-size: $font-size-body1;
+	font-weight: $font-weight-regular;
+	line-height: $line-height-body1;
 }
 
 p.body2,
-time, p > code {
-  font-size: $font-size-body2;
-  font-weight: $font-weight-regular;
-  line-height: $line-height-body2;
+time,
+p > code {
+	font-size: $font-size-body2;
+	font-weight: $font-weight-regular;
+	line-height: $line-height-body2;
 }
 
 p.caption {
-  font-size: $font-size-caption;
-  font-weight: $font-weight-regular;
-  line-height: $line-height-caption;
+	font-size: $font-size-caption;
+	font-weight: $font-weight-regular;
+	line-height: $line-height-caption;
 }
 
-body[data-theme="dark"] {
-  * {
-    color: map.get(theme.$theme-dark, text-primary);
-  }
+body[data-theme='dark'] {
+	* {
+		color: map.get(theme.$theme-dark, text-primary);
+	}
 
-  h1.secondary,
-  h2.secondary,
-  h3.secondary,
-  h4.secondary,
-  h5.secondary,
-  h6.secondary,
-  p.secondary,
-  span.secondary,
-  li.secondary,
-  a.secondary,
-  time {
-    color: map.get(theme.$theme-dark, text-secondary);
-  }
+	h1.secondary,
+	h2.secondary,
+	h3.secondary,
+	h4.secondary,
+	h5.secondary,
+	h6.secondary,
+	p.secondary,
+	span.secondary,
+	li.secondary,
+	a.secondary,
+	time {
+		color: map.get(theme.$theme-dark, text-secondary);
+	}
 }
 
-body[data-theme="light"] {
-  * {
-    color: map.get(theme.$theme-light, text-primary);
-  }
+body[data-theme='light'] {
+	* {
+		color: map.get(theme.$theme-light, text-primary);
+	}
 
-  h1.secondary,
-  h2.secondary,
-  h3.secondary,
-  h4.secondary,
-  h5.secondary,
-  h6.secondary,
-  p.secondary,
-  span.secondary,
-  li.secondary,
-  a.secondary,
-  time {
-    color: map.get(theme.$theme-light, text-secondary);
-  }
+	h1.secondary,
+	h2.secondary,
+	h3.secondary,
+	h4.secondary,
+	h5.secondary,
+	h6.secondary,
+	p.secondary,
+	span.secondary,
+	li.secondary,
+	a.secondary,
+	time {
+		color: map.get(theme.$theme-light, text-secondary);
+	}
 }
-
-
 
 @media (max-width: theme.$breakpoint-md) {
-  h1 {
-    font-size: $font-size-h3;
-    line-height: $line-height-h3;
-  }
+	h1 {
+		font-size: $font-size-h3;
+		line-height: $line-height-h3;
+	}
 
-  h2 {
-    font-size: $font-size-h4;
-    line-height: $line-height-h4;
-  }
+	h2 {
+		font-size: $font-size-h4;
+		line-height: $line-height-h4;
+	}
 
-  h3 {
-    font-size: $font-size-h5;
-    line-height: $line-height-h5;
-  }
+	h3 {
+		font-size: $font-size-h5;
+		line-height: $line-height-h5;
+	}
 
-  h4 {
-    font-size: $font-size-h6;
-    line-height: $line-height-h6;
-  }
+	h4 {
+		font-size: $font-size-h6;
+		line-height: $line-height-h6;
+	}
 
-  h5,
-  h6 {
-    font-size: $font-size-body1;
-    line-height: $line-height-body1;
-  }
+	h5,
+	h6 {
+		font-size: $font-size-body1;
+		line-height: $line-height-body1;
+	}
 
-  p,
-  p.body1 {
-    font-size: $font-size-body2;
-    line-height: $line-height-body2;
-  }
+	p,
+	p.body1 {
+		font-size: $font-size-body2;
+		line-height: $line-height-body2;
+	}
 
-  p.body2 {
-    font-size: $font-size-caption;
-    line-height: $line-height-caption;
-  }
+	p.body2 {
+		font-size: $font-size-caption;
+		line-height: $line-height-caption;
+	}
 
-  p.caption, time {
-    font-size: $font-size-caption;
-    line-height: $line-height-caption;
-  }
+	p.caption,
+	time {
+		font-size: $font-size-caption;
+		line-height: $line-height-caption;
+	}
 }

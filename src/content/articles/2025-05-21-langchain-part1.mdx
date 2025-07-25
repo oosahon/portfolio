@@ -1,22 +1,23 @@
 ---
-title: "An Introduction to Building AI Agents With LangChain and TypeScript"
-pubDate: "May 21 2025"
-description: "Learn how to build AI agents using LangChain’s ReAct framework in JavaScript. This tutorial covers reasoning, tool usage, and memory, helping you create LLM-powered workflows that think and act."
-slug: "building-ai-agents-with-langchain-part-1"
+title: 'An Introduction to Building AI Agents With LangChain and TypeScript'
+pubDate: 'May 21 2025'
+description: 'Learn how to build AI agents using LangChain’s ReAct framework in JavaScript. This tutorial covers reasoning, tool usage, and memory, helping you create LLM-powered workflows that think and act.'
+slug: 'building-ai-agents-with-langchain-part-1'
 readTime: 5
-next: "building-ai-agents-with-langchain-part-2"
+next: 'building-ai-agents-with-langchain-part-2'
 ---
 
 import Callout from '../../components/Callout.astro';
 
-If you’ve not been under a rock for the past few years, you would know the AI hype is getting realer.  
+If you’ve not been under a rock for the past few years, you would know the AI hype is getting realer.
 
-Some of us are even worried about our future as Software Engineers. However, like I tweeted last week, you don’t have to worry about AI taking your jobs if you employ it first.  
+Some of us are even worried about our future as Software Engineers. However, like I tweeted last week, you don’t have to worry about AI taking your jobs if you employ it first.
 
-In this series, I will show you how to do just that: employing AI (as agents).  
+In this series, I will show you how to do just that: employing AI (as agents).
 
-<Callout variant='info' showIcon>
-To follow this series, you would need a good understanding of JavaScript and some basic knowledge of TypeScript.
+<Callout variant="info" showIcon>
+	To follow this series, you would need a good understanding of JavaScript and some basic knowledge
+	of TypeScript.
 </Callout>
 
 ## What is LangChain?
@@ -26,9 +27,9 @@ With LangChain, we can build tools that can reason and act (ReAct agents).
 
 ### What is a ReAct Agent?
 
-While AI agents are used to describe applications or programs that can autonomously perform tasks using AI models, ReAct agents combine reasoning (thinking) and acting (taking actions) in an intertwined manner.  
+While AI agents are used to describe applications or programs that can autonomously perform tasks using AI models, ReAct agents combine reasoning (thinking) and acting (taking actions) in an intertwined manner.
 
-For example, if you were to ask a ReAct agent the following question: "Which company sold the most tacos in the most populous city in Africa?" It would go through the response like so:  
+For example, if you were to ask a ReAct agent the following question: "Which company sold the most tacos in the most populous city in Africa?" It would go through the response like so:
 
 ```plaintext
 [Start: User Question]
@@ -69,17 +70,18 @@ For example, if you were to ask a ReAct agent the following question: "Which com
 ```
 
 Now, imagine if these data were not publicly available. How would your ReAct agent find the answer?
-That’s where tools come in.  
+That’s where tools come in.
 
 ### What are Tools in LangChain?
-Tools are callable functions, usually external APIs, that allow AI agents to perform specialised actions like fetching the latest articles from a headless CMS or querying a private database.  
 
-Let’s see a ReAct agent in action.  
+Tools are callable functions, usually external APIs, that allow AI agents to perform specialised actions like fetching the latest articles from a headless CMS or querying a private database.
 
-<Callout variant='warning'>
-You would need an [OpenAI](https://platform.openai.com/api-keys) and [Tavily](https://tavily.com) API keys to run the following code.
+Let’s see a ReAct agent in action.
+
+<Callout variant="warning">
+	You would need an [OpenAI](https://platform.openai.com/api-keys) and [Tavily](https://tavily.com)
+	API keys to run the following code.
 </Callout>
- 
 
 First, let's install the necessary dependencies by running:
 
@@ -88,8 +90,6 @@ npm i @langchain/community @langchain/core @langchain/langgraph @langchain/opena
 ```
 
 Next, create a file `agent.ts` and paste the following code.
-
-
 
 ```ts:agent.ts
 // This is a slightly modified version of the original code here:
@@ -140,16 +140,15 @@ async function main() {
 main();
 ```
 
-Create a `.env` file in the root directory and add your OpenAI API key:  
-
+Create a `.env` file in the root directory and add your OpenAI API key:
 
 ```env
 OPENAI_API_KEY=your_openai_key_here
 TAVILY_API_KEY=your_tavily_key_here
 ```
 
-<Callout variant='info' showIcon>
-You can find the full code here https://github.com/oosahon/ai-agent-intro
+<Callout variant="info" showIcon>
+	You can find the full code here https://github.com/oosahon/ai-agent-intro
 </Callout>
 
 Here is a brief rundown of what the `agent.ts` does:
@@ -163,7 +162,6 @@ Here is a brief rundown of what the `agent.ts` does:
 7. **Assigns a thread ID (Line 29):** Ensures the agent keeps context by tagging the conversation with a `thread_id`.
 8. **Invokes the agent with a follow-up (Lines 36-39)**: Sends a second message (e.g., “what about NY”) that continues the same conversation thread.
 9. Prints the agent’s response to the terminal (Line 41)
-
 
 Running npx tsx `agent.ts` should produce the following:
 
@@ -185,6 +183,6 @@ For the current weather in New York, you can check the latest updates on:
 osahon@Osahons-MacBook-Pro ai-agent-practice %
 ```
 
-Hopefully, you now understand what AI agents and ReAct are and how LangChain can help you build them.  
+Hopefully, you now understand what AI agents and ReAct are and how LangChain can help you build them.
 
-In subsequent tutorials, I will deep-dive into tools, chains and memory.  
+In subsequent tutorials, I will deep-dive into tools, chains and memory.

@@ -1,144 +1,150 @@
 <header>
-  <div>
-    <a href="/">
-      <img id="logo" src="/logo.svg" alt="osahon.dev" />
-    </a>
+	<div>
+		<a href="/">
+			<img id="logo" src="/logo.svg" alt="osahon.dev" />
+		</a>
 
-    <div>
-      <label id="theme-switch">
-        <input name="theme-switch" type="checkbox" class="theme-checkbox" />
-        <span class="theme-slider">
-          <span>☀️</span>
-          <span>🌙</span>
-        </span>
-      </label>
-    </div>
-  </div>
+		<div>
+			<label id="theme-switch">
+				<input name="theme-switch" type="checkbox" class="theme-checkbox" />
+				<span class="theme-slider">
+					<span>☀️</span>
+					<span>🌙</span>
+				</span>
+			</label>
+		</div>
+	</div>
 </header>
 
 <style lang="scss">
-  @use "sass:map";
-  @use "../styles/theme.scss";
-  @use "../styles/mixins.scss";
+	@use 'sass:map';
+	@use '../styles/theme.scss';
+	@use '../styles/mixins.scss';
 
-  header {
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+	header {
+		position: sticky;
+		top: 0;
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 
-    > div {
-      @include mixins.container;
-      padding: theme.$spacing * 1.5 theme.$spacing * 3;
-      display: flex;
-      justify-content: space-between;
-    }
-  }
+		> div {
+			@include mixins.container;
+			padding: theme.$spacing * 1.5 theme.$spacing * 3;
+			display: flex;
+			justify-content: space-between;
+		}
+	}
 
-  #logo {
-    height: 40px;
-  }
-  #theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    cursor: pointer;
+	#logo {
+		height: 40px;
+	}
+	#theme-switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		cursor: pointer;
 
-    input {
-      display: none;
-    }
-  }
+		input {
+			display: none;
+		}
+	}
 
-  .theme-slider {
-    @include mixins.themeTransition;
-    background-color: map.get(theme.$theme-light, bg);
-    border-radius: 34px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6px;
-    font-size: 16px;
-  }
+	.theme-slider {
+		@include mixins.themeTransition;
+		background-color: map.get(theme.$theme-light, bg);
+		border-radius: 34px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 6px;
+		font-size: 16px;
+	}
 
-  .theme-slider::before {
-    content: "";
-    position: absolute;
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: map.get(theme.$theme-dark, bg);
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    z-index: 1;
-  }
+	.theme-slider::before {
+		content: '';
+		position: absolute;
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: map.get(theme.$theme-dark, bg);
+		border-radius: 50%;
+		transition: transform 0.3s ease;
+		z-index: 1;
+	}
 
-  .theme-checkbox:checked + .theme-slider {
-    background-color: map.get(theme.$theme-light, text-primary);
-  }
+	.theme-checkbox:checked + .theme-slider {
+		background-color: map.get(theme.$theme-light, text-primary);
+	}
 
-  .theme-checkbox:checked + .theme-slider::before {
-    transform: translateX(26px);
-    background-color: map.get(theme.$theme-light, bg);
-  }
+	.theme-checkbox:checked + .theme-slider::before {
+		transform: translateX(26px);
+		background-color: map.get(theme.$theme-light, bg);
+	}
 
-  .theme-slider .icon {
-    z-index: 2;
-    pointer-events: none;
-  }
+	.theme-slider .icon {
+		z-index: 2;
+		pointer-events: none;
+	}
 </style>
 
 <script>
-  document.querySelector("#theme-switch")?.addEventListener("change", () => {
-    let preferences = {};
+	document.querySelector('#theme-switch')?.addEventListener('change', () => {
+		let preferences = {};
 
-    try {
-      const savedPreferences = localStorage.getItem("preferences") ?? "{}";
-      preferences = JSON.parse(savedPreferences);
-    } catch (e) {}
+		try {
+			const savedPreferences = localStorage.getItem('preferences') ?? '{}';
+			preferences = JSON.parse(savedPreferences);
+		} catch (e) {}
 
-    const body = document.querySelector("body");
-    const logo = document.querySelector("#logo");
+		const body = document.querySelector('body');
+		const logo = document.querySelector('#logo');
 
-    const codeBlocks = document.querySelectorAll("pre");
+		const codeBlocks = document.querySelectorAll('pre');
 
-    if (!body) return;
+		if (!body) return;
 
-    const theme = body?.getAttribute("data-theme");
+		const theme = body?.getAttribute('data-theme');
 
-    if (theme === "dark") {
-      body.setAttribute("data-theme", "light");
-      logo?.setAttribute("src", "/logo.svg");
+		if (theme === 'dark') {
+			body.setAttribute('data-theme', 'light');
+			logo?.setAttribute('src', '/logo.svg');
 
-      codeBlocks.forEach((block) => {
-        block.classList.remove("github-light");
-        block.classList.add("github-dark");
-      });
+			codeBlocks.forEach((block) => {
+				block.classList.remove('github-light');
+				block.classList.add('github-dark');
+			});
 
-      window.localStorage.setItem(
-        "preferences",
-        JSON.stringify({ ...preferences, theme: "light" })
-      );
-    } else {
-      body.setAttribute("data-theme", "dark");
-      logo?.setAttribute("src", "/logo-light.svg");
+			window.localStorage.setItem(
+				'preferences',
+				JSON.stringify({
+					...preferences,
+					theme: 'light',
+				})
+			);
+		} else {
+			body.setAttribute('data-theme', 'dark');
+			logo?.setAttribute('src', '/logo-light.svg');
 
-      codeBlocks.forEach((block) => {
-        block.classList.remove("github-dark");
-        block.classList.add("github-light");
-      });
+			codeBlocks.forEach((block) => {
+				block.classList.remove('github-dark');
+				block.classList.add('github-light');
+			});
 
-      window.localStorage.setItem(
-        "preferences",
-        JSON.stringify({ ...preferences, theme: "dark" })
-      );
-    }
-  });
+			window.localStorage.setItem(
+				'preferences',
+				JSON.stringify({
+					...preferences,
+					theme: 'dark',
+				})
+			);
+		}
+	});
 </script>

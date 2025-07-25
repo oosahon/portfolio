@@ -1,74 +1,69 @@
 ---
 interface Props {
-  variant?: "info" | "success" | "warning" | "error";
-  showIcon?: boolean;
+	variant?: 'info' | 'success' | 'warning' | 'error';
+	showIcon?: boolean;
 }
 
-const { variant = "info", showIcon } = Astro.props as Props;
+const { variant = 'info', showIcon } = Astro.props as Props;
 ---
 
 <aside class={variant}>
-  <div>
-    {
-      showIcon && (
-        <img
-          src={`/callout-${variant}.svg`}
-          alt={`${variant} icon`}
-          width="40"
-          height="40"
-        />
-      )
-    }
-  </div>
-  <div class="callout-slot">
-    <slot />
-  </div>
+	<div>
+		{
+			showIcon && (
+				<img src={`/callout-${variant}.svg`} alt={`${variant} icon`} width="40" height="40" />
+			)
+		}
+	</div>
+	<div class="callout-slot">
+		<slot />
+	</div>
 </aside>
 
 <style lang="scss">
-  @use "sass:map";
-  @use "../styles/theme.scss";
-  @use "../styles/typography.scss";
+	@use 'sass:map';
+	@use '../styles/theme.scss';
+	@use '../styles/typography.scss';
 
-  aside {
-    display: flex;
-    gap: theme.$spacing * 2;
-    border: 1px solid map.get(theme.$theme-dark, color-info);
-    border-radius: theme.$border-radius;
-    padding: theme.$spacing * 3;
-    margin: theme.$spacing * 5 0;
+	aside {
+		display: flex;
+		gap: theme.$spacing * 2;
+		border: 1px solid map.get(theme.$theme-dark, color-info);
+		border-radius: theme.$border-radius;
+		padding: theme.$spacing * 3;
+		margin: theme.$spacing * 5 0;
 
-    &.info {
-      background-color: rgb(map.get(theme.$theme-dark, color-info), 0.1);
-      border-color: map.get(theme.$theme-dark, color-info);
-    }
+		&.info {
+			background-color: rgb(map.get(theme.$theme-dark, color-info), 0.1);
+			border-color: map.get(theme.$theme-dark, color-info);
+		}
 
-    &.success {
-      background-color: rgb(map.get(theme.$theme-dark, color-success), 0.1);
-      border-color: map.get(theme.$theme-dark, color-success);
-    }
+		&.success {
+			background-color: rgb(map.get(theme.$theme-dark, color-success), 0.1);
+			border-color: map.get(theme.$theme-dark, color-success);
+		}
 
-    &.warning {
-      background-color: rgb(map.get(theme.$theme-dark, color-warning), 0.1);
-      border-color: map.get(theme.$theme-dark, color-warning);
-    }
+		&.warning {
+			background-color: rgb(map.get(theme.$theme-dark, color-warning), 0.1);
+			border-color: map.get(theme.$theme-dark, color-warning);
+		}
 
-    &.error {
-      background-color: rgb(map.get(theme.$theme-dark, color-error), 0.1);
-      border-color: map.get(theme.$theme-dark, color-error);
-    }
-  }
+		&.error {
+			background-color: rgb(map.get(theme.$theme-dark, color-error), 0.1);
+			border-color: map.get(theme.$theme-dark, color-error);
+		}
+	}
 </style>
 
 <script>
-  const slotContent = document.querySelectorAll(".callout-slot > p");
+	const slotContent = document.querySelectorAll('.callout-slot > p');
 
-  if (slotContent) {
-    slotContent.forEach((c) => {
-      // @ts-ignore
-      c.style.margin = 0;
-      // @ts-ignore
-      c.style.fontSize = "1rem";
-    });
-  }
+	if (slotContent) {
+		slotContent.forEach((c) => {
+			// @ts-ignore
+			c.style.margin = 0;
+			// @ts-ignore
+			c.style.fontSize = '1rem';
+		});
+	}
 </script>

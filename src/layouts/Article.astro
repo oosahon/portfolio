@@ -1,56 +1,56 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Body from "../components/Body.astro";
-import ArticleTitle from "../components/ArticleTitle.astro";
-import ArticleLink from "../components/ArticleLink.astro";
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Body from '../components/Body.astro';
+import ArticleTitle from '../components/ArticleTitle.astro';
+import ArticleLink from '../components/ArticleLink.astro';
 
-type Props = CollectionEntry<"article">["data"];
+type Props = CollectionEntry<'article'>['data'];
 
 const { title, description, previous, next } = Astro.props;
 ---
 
 <html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
 
-  <Body>
-    <Header />
-    <main>
-      <article>
-        <ArticleTitle {...Astro.props} />
-        <slot />
-      </article>
-      <div class="article-links">
-        <div>
-          {previous && <ArticleLink type="previous" slug={previous} />}
-        </div>
-        <div>
-          {next && <ArticleLink type="next" slug={next} />}
-        </div>
-      </div>
-    </main>
-  </Body>
+	<Body>
+		<Header />
+		<main>
+			<article>
+				<ArticleTitle {...Astro.props} />
+				<slot />
+			</article>
+			<div class="article-links">
+				<div>
+					{previous && <ArticleLink type="previous" slug={previous} />}
+				</div>
+				<div>
+					{next && <ArticleLink type="next" slug={next} />}
+				</div>
+			</div>
+		</main>
+	</Body>
 </html>
 
 <style lang="scss">
-  @use "../styles/theme.scss";
-  @use "../styles/mixins.scss";
+	@use '../styles/theme.scss';
+	@use '../styles/mixins.scss';
 
-  main {
-    @include mixins.contentArea;
+	main {
+		@include mixins.contentArea;
 
-    .article-links {
-      display: flex;
-      justify-content: space-between;
-      gap: theme.$spacing;
-      margin-top: theme.$spacing * 12;
+		.article-links {
+			display: flex;
+			justify-content: space-between;
+			gap: theme.$spacing;
+			margin-top: theme.$spacing * 12;
 
-      > div {
-        width: 50%;
-      }
-    }
-  }
+			> div {
+				width: 50%;
+			}
+		}
+	}
 </style>

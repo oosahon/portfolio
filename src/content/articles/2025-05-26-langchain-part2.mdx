@@ -1,17 +1,17 @@
 ---
-title: "Building AI Agents With LangChain Part II: Understanding Tools"
-pubDate: "May 26 2025"
-description: "Learn how to create and use tools in LangChain to supercharge your AI agents. This guide breaks down tool creation, usage, and integration with chat models using TypeScript."
-slug: "building-ai-agents-with-langchain-part-2"
+title: 'Building AI Agents With LangChain Part II: Understanding Tools'
+pubDate: 'May 26 2025'
+description: 'Learn how to create and use tools in LangChain to supercharge your AI agents. This guide breaks down tool creation, usage, and integration with chat models using TypeScript.'
+slug: 'building-ai-agents-with-langchain-part-2'
 readTime: 3
-previous: "building-ai-agents-with-langchain-part-1"
+previous: 'building-ai-agents-with-langchain-part-1'
 ---
 
-import Callout from '../../components/Callout.astro'
+import Callout from '../../components/Callout.astro';
 
 [Previously](/articles/building-ai-agents-with-langchain-part-1), we looked at AI agents, including ReAct agents, and introduced LangChain. In this lesson, we will focus on one of LangChain’s most powerful features by looking at what tools are, how they work, and how to use them.
 
-From the previous tutorial, we saw the following piece of code:  
+From the previous tutorial, we saw the following piece of code:
 
 ```ts:agent.ts
 // This is a slightly modified version of the original code here:
@@ -63,11 +63,11 @@ main();
 ```
 
 On `line 15` we defined the list of tools for our agent.
-When we ran npm tsx agent.ts our AI agent used a provided tool, `TavilySearchResults` to search the internet for the latest weather report.  
+When we ran npm tsx agent.ts our AI agent used a provided tool, `TavilySearchResults` to search the internet for the latest weather report.
 
-That’s what tools are — utility functions for your AI agent.  
+That’s what tools are — utility functions for your AI agent.
 
-In LangChain, tools are functions with a well-defined input and output interface that can be called by agents or chat models ([that support tool calling](https://python.langchain.com/docs/integrations/chat/#featured-providers)) to perform specific, often external, tasks such as API calls, calculations, or database queries.  
+In LangChain, tools are functions with a well-defined input and output interface that can be called by agents or chat models ([that support tool calling](https://python.langchain.com/docs/integrations/chat/#featured-providers)) to perform specific, often external, tasks such as API calls, calculations, or database queries.
 
 ### How to Create a Tool in LangChain
 
@@ -99,13 +99,13 @@ export const multiplicationTool = tool(multiply, {
 });
 ```
 
-Let’s take a closer look at the config object:  
+Let’s take a closer look at the config object:
 
-- **schema**: LangChain supports schema definition with [zod](https://www.npmjs.com/package/zod), providing information about the shape of the tool’s input to the chat model so that it can be called properly.  
-- **name**: a continuous string (no space or special characters) used to reference the tool.  
-- **description**: optional but highly recommended. The description provides more details about the tool, enabling the chat model to know when to call the tool.  
+- **schema**: LangChain supports schema definition with [zod](https://www.npmjs.com/package/zod), providing information about the shape of the tool’s input to the chat model so that it can be called properly.
+- **name**: a continuous string (no space or special characters) used to reference the tool.
+- **description**: optional but highly recommended. The description provides more details about the tool, enabling the chat model to know when to call the tool.
 
-Other parameters, not covered in this chapter, but surely in subsequent articles, include:  
+Other parameters, not covered in this chapter, but surely in subsequent articles, include:
 
 - **callbacks**: a list of callback event handlers
 - **metadata**: pass additional data to your tool that can be used for logging, monitoring, tool selection logic, etc.
@@ -117,22 +117,22 @@ Other parameters, not covered in this chapter, but surely in subsequent articles
 
 ### Tools usage
 
-Tools can be called inside or outside the context of a chat model.  
+Tools can be called inside or outside the context of a chat model.
 
 The `invoke` method of a tool allows you to call it like you would a regular function, like so:
 
 ```ts
-multiplicationTool.invoke({ a: 2, b: 3}) // 6
+multiplicationTool.invoke({ a: 2, b: 3 }); // 6
 ```
 
-However, within the context of a chat model that supports the tool calling API, the chat model knows the right tool to use using the `description` of the tool.  
+However, within the context of a chat model that supports the tool calling API, the chat model knows the right tool to use using the `description` of the tool.
 
 Let us use our multiplication tool.
 
-Update your `agent.ts` file to look like so:  
+Update your `agent.ts` file to look like so:
 
 <Callout showIcon>
-You can find the full code here: https://github.com/oosahon/ai-agent-intro/tree/custom-tool
+	You can find the full code here: https://github.com/oosahon/ai-agent-intro/tree/custom-tool
 </Callout>
 
 ```ts
@@ -196,8 +196,8 @@ Running this code should yield the following:
 The result of multiplying 4 and 9 is 36.
 ```
 
-As you can see, the chat model used our tool.  
+As you can see, the chat model used our tool.
 
 Go ahead, play around and try to break things!
 
-Now that you are familiar with tools, in the next section, we will take a look at memories and how to make your AI agent aware of previous conversations, improving performance.  
+Now that you are familiar with tools, in the next section, we will take a look at memories and how to make your AI agent aware of previous conversations, improving performance.

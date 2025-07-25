@@ -1,185 +1,184 @@
-@use "sass:map";
-@use "./theme.scss";
-@use "./mixins.scss";
-@use "./typography.scss";
+@use 'sass:map';
+@use './theme.scss';
+@use './mixins.scss';
+@use './typography.scss';
 
 *::selection {
-  background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
-  color: map.get(theme.$theme-light, text-primary);
+	background: rgb(map.get(theme.$theme-dark, color-secondary), 50%);
+	color: map.get(theme.$theme-light, text-primary);
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: map.get(theme.$theme-dark, bg);
-  background-attachment: fixed;
-  background-size: cover;
-  color: map.get(theme.$theme-dark, text-primary);
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  min-height: 100vh;
+	background-color: map.get(theme.$theme-dark, bg);
+	background-attachment: fixed;
+	background-size: cover;
+	color: map.get(theme.$theme-dark, text-primary);
+	font-family: 'Inter', sans-serif;
+	margin: 0;
+	min-height: 100vh;
 
-  blockquote {
-    padding-left: theme.$spacing * 0.5;
-    margin: 1rem 0;
-    font-style: italic;
-    border-left: 4px solid map.get(theme.$theme-dark, bg-light);
+	blockquote {
+		padding-left: theme.$spacing * 0.5;
+		margin: 1rem 0;
+		font-style: italic;
+		border-left: 4px solid map.get(theme.$theme-dark, bg-light);
 
-    p {
-      padding-left: theme.$spacing * 2;
-    }
-  }
+		p {
+			padding-left: theme.$spacing * 2;
+		}
+	}
 }
 
 article {
-  p {
-    line-height: 2rem;
-    margin-bottom: theme.$spacing * 3;
-  }
+	p {
+		line-height: 2rem;
+		margin-bottom: theme.$spacing * 3;
+	}
 
-  ul,
-  ol {
-    padding-inline-start: theme.$spacing * 4;
-    margin-bottom: theme.$spacing * 3;
+	ul,
+	ol {
+		padding-inline-start: theme.$spacing * 4;
+		margin-bottom: theme.$spacing * 3;
 
-    li {
-      margin-bottom: theme.$spacing * 2;
-    }
-  }
+		li {
+			margin-bottom: theme.$spacing * 2;
+		}
+	}
 
-  p > code,
-  li > code {
-    background-color: rgb(map.get(theme.$theme-dark, color-secondary), 0.1);
-    padding: theme.$spacing * 0.5 theme.$spacing;
-    border-radius: 4px;
-    color: map.get(theme.$theme-dark, color-secondary) !important;
-    font-family: monospace;
-  }
+	p > code,
+	li > code {
+		background-color: rgb(map.get(theme.$theme-dark, color-secondary), 0.1);
+		padding: theme.$spacing * 0.5 theme.$spacing;
+		border-radius: 4px;
+		color: map.get(theme.$theme-dark, color-secondary) !important;
+		font-family: monospace;
+	}
 }
 
 pre {
-  padding: theme.$spacing * 2;
-  margin: theme.$spacing * 2 0;
-  border-radius: 4px;
+	padding: theme.$spacing * 2;
+	margin: theme.$spacing * 2 0;
+	border-radius: 4px;
 
-  code {
-    line-height: 1.5rem;
+	code {
+		line-height: 1.5rem;
 
-    > span.line.diff {
-      padding: theme.$spacing * 2;
-      line-height: 0px;
-      display: inline-block;
-      width: 100%;
+		> span.line.diff {
+			padding: theme.$spacing * 2;
+			line-height: 0px;
+			display: inline-block;
+			width: 100%;
 
-      &.remove {
-        background-color: rgba(255, 0, 0, 0.1) !important; 
+			&.remove {
+				background-color: rgba(255, 0, 0, 0.1) !important;
 
-        &::before {
-          content: "-";
-           color: rgba(255, 0, 0, 0.7);
-        }
-      }
+				&::before {
+					content: '-';
+					color: rgba(255, 0, 0, 0.7);
+				}
+			}
 
-      &.add {
-        background-color: rgba(0, 255, 0, 0.1) !important;
-        position: relative;
+			&.add {
+				background-color: rgba(0, 255, 0, 0.1) !important;
+				position: relative;
 
+				&::before {
+					content: '+';
+					color: rgba(0, 255, 0, 0.7);
+				}
+			}
 
-        &::before {
-          content: "+";
-          color: rgba(0, 255, 0, 0.7);
-        }
-      }
-
-      span {
-        background-color: inherit;
-        height: 100%;
-        display: inline-block;
-      }
-    }
-  }
+			span {
+				background-color: inherit;
+				height: 100%;
+				display: inline-block;
+			}
+		}
+	}
 }
 
 .shiki.has-line-numbers {
-  counter-reset: lineNumber;
-  padding-left: 3.5em;
-  position: relative;
+	counter-reset: lineNumber;
+	padding-left: 3.5em;
+	position: relative;
 }
 
 .shiki.has-line-numbers .code-line::before {
-  counter-increment: lineNumber;
-  content: counter(lineNumber);
-  position: absolute;
-  left: -3.5em;
-  width: 3em;
-  text-align: right;
-  color: rgba(107, 114, 128, 0.5);
-  user-select: none;
-  font-size: inherit;
-  font-weight: inherit;
+	counter-increment: lineNumber;
+	content: counter(lineNumber);
+	position: absolute;
+	left: -3.5em;
+	width: 3em;
+	text-align: right;
+	color: rgba(107, 114, 128, 0.5);
+	user-select: none;
+	font-size: inherit;
+	font-weight: inherit;
 }
 
 .astro-code {
-  counter-reset: lineNumber;
+	counter-reset: lineNumber;
 
-  .line {
-    padding-left: theme.$spacing * 3;
-    position: relative;
+	.line {
+		padding-left: theme.$spacing * 3;
+		position: relative;
 
-    &::after {
-      counter-increment: lineNumber;
-      content: counter(lineNumber);
-      position: absolute;
-      left: theme.$spacing * -3;
-      width: theme.$spacing * 4;
-      color: inherit;
-      opacity: 0.5;
-      text-align: right;
-      user-select: none;
-      font-size: inherit;
-      font-weight: inherit;
-    }
-  }
+		&::after {
+			counter-increment: lineNumber;
+			content: counter(lineNumber);
+			position: absolute;
+			left: theme.$spacing * -3;
+			width: theme.$spacing * 4;
+			color: inherit;
+			opacity: 0.5;
+			text-align: right;
+			user-select: none;
+			font-size: inherit;
+			font-weight: inherit;
+		}
+	}
 
-  &[data-language="plaintext"] {
-    .line {
-      padding-left: 0;
+	&[data-language='plaintext'] {
+		.line {
+			padding-left: 0;
 
-      &::after {
-        display: none;
-      }
-    }
-  }
+			&::after {
+				display: none;
+			}
+		}
+	}
 }
 
-body[data-theme="dark"] {
-  background-color: map.get(theme.$theme-dark, bg);
-  color: map.get(theme.$theme-dark, text-primary);
+body[data-theme='dark'] {
+	background-color: map.get(theme.$theme-dark, bg);
+	color: map.get(theme.$theme-dark, text-primary);
 
-  .astro-code,
-  .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-  }
+	.astro-code,
+	.astro-code span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
 }
 
-body[data-theme="light"] {
-  background-color: map.get(theme.$theme-light, bg);
-  background-image: none;
-  color: map.get(theme.$theme-light, text-primary);
+body[data-theme='light'] {
+	background-color: map.get(theme.$theme-light, bg);
+	background-image: none;
+	color: map.get(theme.$theme-light, text-primary);
 
-  .astro-code.line::after {
-    color: map.get(theme.$theme-light, text-secondary);
-  }
+	.astro-code.line::after {
+		color: map.get(theme.$theme-light, text-secondary);
+	}
 
-  pre {
-    background-color: whitesmoke !important;
-  }
+	pre {
+		background-color: whitesmoke !important;
+	}
 }
