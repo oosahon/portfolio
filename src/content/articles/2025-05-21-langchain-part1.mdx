@@ -75,13 +75,20 @@ Tools are callable functions, usually external APIs, that allow AI agents to per
 
 Let’s see a ReAct agent in action.  
 
-<Callout variant='info' showIcon>
-You would need an OpenAI and Tavily API keys to run the following code.
+<Callout variant='warning'>
+You would need an [OpenAI](https://platform.openai.com/api-keys) and [Tavily](https://tavily.com) API keys to run the following code.
 </Callout>
+ 
 
-Create a file `agent.ts` and paste the following code.
+First, let's install the necessary dependencies by running:
 
-You can find the full code here https://github.com/oosahon/ai-agent-intro
+```plaintext
+npm i @langchain/community @langchain/core @langchain/langgraph @langchain/openai dotenv
+```
+
+Next, create a file `agent.ts` and paste the following code.
+
+
 
 ```ts:agent.ts
 // This is a slightly modified version of the original code here:
@@ -140,6 +147,9 @@ OPENAI_API_KEY=your_openai_key_here
 TAVILY_API_KEY=your_tavily_key_here
 ```
 
+<Callout variant='info' showIcon>
+You can find the full code here https://github.com/oosahon/ai-agent-intro
+</Callout>
 
 Here is a brief rundown of what the `agent.ts` does:
 
@@ -177,5 +187,3 @@ osahon@Osahons-MacBook-Pro ai-agent-practice %
 Hopefully, you now understand what AI agents and ReAct are and how LangChain can help you build them.  
 
 In subsequent tutorials, I will deep-dive into tools, chains and memory.  
-
-You can find the code sample here: https://github.com/oosahon/ai-agent-intro

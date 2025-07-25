@@ -20,7 +20,7 @@ const { variant = "info", showIcon } = Astro.props as Props;
       )
     }
   </div>
-  <div>
+  <div class="callout-slot">
     <slot />
   </div>
 </aside>
@@ -37,10 +37,6 @@ const { variant = "info", showIcon } = Astro.props as Props;
     border-radius: theme.$border-radius;
     padding: theme.$spacing * 3;
     margin: theme.$spacing * 5 0;
-
-    p {
-      font-size: typography.$font-size-body2;
-    }
 
     &.info {
       background-color: rgb(map.get(theme.$theme-dark, color-info), 0.1);
@@ -63,3 +59,16 @@ const { variant = "info", showIcon } = Astro.props as Props;
     }
   }
 </style>
+
+<script>
+  const slotContent = document.querySelectorAll(".callout-slot > p");
+
+  if (slotContent) {
+    slotContent.forEach((c) => {
+      // @ts-ignore
+      c.style.margin = 0;
+      // @ts-ignore
+      c.style.fontSize = "1rem";
+    });
+  }
+</script>
