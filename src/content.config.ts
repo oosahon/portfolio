@@ -6,7 +6,7 @@ const article = defineCollection({
 		base: './src/content/articles',
 		pattern: '**/*.{md,mdx}',
 	}),
-	schema: () =>
+	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
@@ -17,6 +17,7 @@ const article = defineCollection({
 			external: z.boolean().optional(),
 			next: z.string().optional(),
 			previous: z.string().optional(),
+			previewImage: image().optional(),
 		}),
 });
 export const collections = { article };
